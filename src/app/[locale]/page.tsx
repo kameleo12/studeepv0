@@ -1,7 +1,5 @@
-import Search from "@root/modules/search/react/search/Search";
-
 const RootPage = () => {
-  return <Search />;
+  return ;
 };
 
 export default RootPage;
