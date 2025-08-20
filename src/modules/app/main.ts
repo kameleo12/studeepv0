@@ -12,7 +12,7 @@ export class App {
 
   constructor() {
     this.httpClient = axios.create({
-      baseURL: "https://viral-short-backend-e9b52f0c4dd8.herokuapp.com/",
+      baseURL: "",
     });
     this.dependencies = this.setupDependencies();
     this.store = createStore({ dependencies: this.dependencies });
