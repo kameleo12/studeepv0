@@ -21,18 +21,13 @@ describe("Get stuff by id", () => {
 
     store = createTestStore({
       initialState: {
-        // Ancien: tiktokMediasSearching
-        // Nouveau: stuffsSearching (nomme comme ton slice réel)
         stuffsSearching: {
           results: [stuff1, stuff2],
           query: "testquery",
           loading: false,
           started: true,
           searchId: "search-id",
-          // Supprimé: searchType/sortOptions qui étaient spécifiques aux médias
         },
-        // Ancien: currentMedia
-        // Nouveau: currentStuff (nomme comme ton slice réel)
         currentStuff: {
           stuff: stuff1,
           loading: false,
