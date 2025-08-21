@@ -3,8 +3,6 @@ import { Dependencies } from "@root/modules/store/dependencies";
 import { StubStorageProvider } from "@root/modules/global/core/testing/stub-storage.provider";
 import { InMemoryAnalyticsGateway } from "@root/modules/global/gateways-impl/in-memory-analytics.gateway";
 import { AppState } from "@root/modules/store/app-state";
-import { StubTiktokMediasGateway } from "@root/modules/search/gateways-impl/stub-tiktok-medias.gateway";
-import { StubLibraryGateway } from "@root/modules/libraries/gateway-impl/stub-library.gateway";
 
 /**
  * Create testing dependencies with provided defaults
@@ -15,9 +13,7 @@ const createDependencies = (
   dependencies?: Partial<Dependencies>
 ): Dependencies => ({
   analyticsGateway: new InMemoryAnalyticsGateway(),
-  tiktokMediasGateway: new StubTiktokMediasGateway(),
   storageProvider: new StubStorageProvider(),
-  libraryGateway: new StubLibraryGateway(),
 
   ...dependencies,
 });
