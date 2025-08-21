@@ -1,7 +1,7 @@
 "use client";
 
-import { SearchStuffItem } from "@root/modules/dofus/react/components/SearchItem";
-import { useSearchResultsStuff } from "@root/modules/dofus/react/hooks/use-search-results.hook";
+import { SearchStuffItem } from "@root/modules/dofus/react/search/components/SearchItem";
+import { useSearchResultsStuff } from "@root/modules/dofus/react/search/hooks/use-search-results.hook";
 import { Skeleton } from "@root/modules/shared/react/components/ui/Skeleton";
 
 import { motion } from "framer-motion";
@@ -23,7 +23,7 @@ export default function SearchResults() {
       >
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-bold">Titre</h2>
+            <h2 className="text-2xl font-bold">Résultat des stuffs</h2>
             <p className="text-gray-500">Chargement</p>
           </div>
 
@@ -48,7 +48,7 @@ export default function SearchResults() {
             transition={{ duration: 0.5 }}
             className="text-2xl font-bold"
           >
-           Titre
+           Résultat des stuffs
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

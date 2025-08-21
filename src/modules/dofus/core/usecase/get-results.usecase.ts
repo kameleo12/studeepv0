@@ -1,4 +1,3 @@
-// @root/modules/search/usecases/get-stuff-results.usecase.ts
 import { StuffDomainModel } from "../model/stuff.domain-model";
 import { createAppAsyncThunk } from "@root/modules/store/create-app-async-thunk";
 

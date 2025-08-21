@@ -7,7 +7,7 @@ import {
   Command,
   CommandInput,
 } from "@root/modules/shared/react/components/ui/Command";
-import { useSearchBarStuff } from "@root/modules/dofus/react/hooks/use-search-bar.hook";
+import { useSearchBarStuff } from "@root/modules/dofus/react/search/hooks/use-search-bar.hook";
 
 export default function SearchBar({
   onSearch,
@@ -47,6 +47,7 @@ export default function SearchBar({
       ref={ref}
       onSubmit={onSubmit}
       className="relative w-full mt-8 mx-auto bg-white"
+      
     >
       <Command
         className={`bg-white relative overflow-visible w-full ${
@@ -57,6 +58,7 @@ export default function SearchBar({
           value={query}
           onValueChange={handleValueChange}
           className="w-full mx-auto border-0 pr-6 py-4 text-gray-900 placeholder:text-gray-500 sm:text-lg sm:leading-6 focus:outline-none focus:ring-0 rounded-lg"
+          placeholder="Chercher un stuff"
         />
 
         <button

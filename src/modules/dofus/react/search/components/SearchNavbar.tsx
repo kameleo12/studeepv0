@@ -30,7 +30,7 @@ export default function SearchNavbar() {
                 href={`/`}
                 className={isActive(`/`) ? activeClass : inactiveClass}
               >
-                Dashboard
+                Stuff
               </Link>
         
             </div>

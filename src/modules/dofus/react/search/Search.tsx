@@ -1,30 +1,25 @@
 "use client";
 
-import SearchBar from "@root/modules/dofus/react/components/SearchBar";
-import SearchNavbar from "@root/modules/dofus/react/components/SearchNavbar";
-import SearchResults from "@root/modules/dofus/react/components/SearchResults";
-
+import SearchBar from "@root/modules/dofus/react/search/components/SearchBar";
+import SearchNavbar from "@root/modules/dofus/react/search/components/SearchNavbar";
+import SearchResults from "@root/modules/dofus/react/search/components/SearchResults";
 import { motion, AnimatePresence } from "framer-motion";
-
 import { useAppDispatch } from "@root/modules/store/store";
 import { getStuffResults } from "@root/modules/dofus/core/usecase/get-results.usecase";
-import { useSearchResultsStuff } from "@root/modules/dofus/react/hooks/use-search-results.hook";
+import { useSearchResultsStuff } from "@root/modules/dofus/react/search/hooks/use-search-results.hook";
 import { searchStuffs } from "@root/modules/dofus/core/usecase/search-stuff.usecase";
 
 
 export default function Search() {
-  // <-- nouveau hook: renvoie {stuffs, hasStarted, isLoading, searchId}
   const { stuffs, hasStarted, isLoading, searchId } = useSearchResultsStuff();
 
   const dispatch = useAppDispatch();
 
-  // onSearch : lance la recherche puis récupère les résultats
   const onSearch = async (query: string) => {
     const { searchId } = await dispatch(searchStuffs({ query })).unwrap();
     await dispatch(getStuffResults({ searchId }));
   };
 
-  // objet "searchResults" pour rester proche de ton ancien shape si tu y tiens
   const searchResults = { stuffs, hasStarted, isLoading, searchId };
 
   return (
@@ -49,7 +44,7 @@ export default function Search() {
                   transition={{ duration: 0.5 }}
                   className="text-5xl md:text-6xl font-extrabold text-center leading-tight mb-2"
                 >
-                  Titre
+                  Stuff
                 </motion.h1>
               )}
             </AnimatePresence>

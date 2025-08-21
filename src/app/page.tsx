@@ -1,4 +1,4 @@
-import Search from "@root/modules/dofus/react/Search";
+import Search from "@root/modules/dofus/react/search/Search";
 
 const RootPage = () => {
   return <Search />;

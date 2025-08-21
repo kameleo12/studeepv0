@@ -14,7 +14,6 @@ export const useSearchBarStuff = ({
   );
 
   const [query, setQuery] = useState(globalQuery);
-  const dispatch = useAppDispatch(); // prêt si tu veux dispatcher searchStuffs ici
 
   useEffect(() => {
     setQuery(globalQuery);
