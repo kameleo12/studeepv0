@@ -35,27 +35,6 @@ export class InMemoryStuffsGateway implements IStuffsGateway {
     return this.stuffs.find((s) => s.id === stuffId);
   }
 
-  async getQuerySuggestions(input: string): Promise<string[]> {
-    await wait(500);
-
-    const trimmed = (input ?? "").trim();
-    if (!trimmed) return [];
-
-    const lower = trimmed.toLowerCase();
-
-    // On déduplique les descriptions, puis on filtre sur l'input
-    const descriptions = Array.from(
-      new Set(this.stuffs.map((s) => s.items.description))
-    );
-
-    const matched = descriptions.filter((d) =>
-      d?.toLowerCase().includes(lower)
-    );
-
-    // Retourne jusqu'à 6 suggestions en conservant la casse d'origine
-    return matched.slice(0, 6);
-  }
-
   // --- Données en mémoire : compatibles avec SearchDomainModel.Stuff ---
 
   private readonly stuffs: StuffDomainModel.Stuff[] = [

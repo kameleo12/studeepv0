@@ -3,6 +3,7 @@ import { createTestStore } from "@root/modules/testing/tests-environment";
 import { AppStore, AppDispatch } from "@root/modules/store/store";
 import { StuffDomainModel } from "../model/stuff.domain-model";
 import { StubStuffsGateway } from "@root/modules/dofus/gateways-impl/stub-stuffs.gateway";
+import { createStuffFixture } from "@root/modules/dofus/core/testing/stuff.fixture";
 
 
 
@@ -56,7 +57,3 @@ describe("Get stuff by id", () => {
     expect(store.getState().currentStuff.stuff).toEqual(stuff1);
   });
 });
-function createStuffFixture(arg0: { id: string; }): StuffDomainModel.Stuff {
-  throw new Error("Function not implemented.");
-}
-

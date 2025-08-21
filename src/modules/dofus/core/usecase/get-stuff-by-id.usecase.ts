@@ -8,7 +8,7 @@ export const getStuffById = createAppAsyncThunk<
   "stuff/getStuffById",
   async ({ stuffId, searchId }, { extra }) => {
     const { stuffsGateway } = extra;
-    const stuff = await stuffsGateway.getById(searchId, stuffId);
+    const stuff = await stuffsGateway.getById(stuffId, searchId);
     return stuff;
   }
 );

@@ -8,9 +8,11 @@ import {
 import { Dependencies } from "@root/modules/store/dependencies";
 import { AppState } from "@root/modules/store/app-state";
 import { currentStuffReducer as currentStuff } from "@root/modules/dofus/core/reducers/current-stuff.reducer";
+import { stuffsSearchingReducer as stuffsSearching } from "@root/modules/dofus/core/reducers/search-results.reducer";
 
 const reducers = combineReducers({
   currentStuff,
+  stuffsSearching,
 });
 
 export type AppStore = ReturnType<typeof createStore>;

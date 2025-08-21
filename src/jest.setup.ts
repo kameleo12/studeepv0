@@ -19,13 +19,6 @@ jest.mock("@root/assets/images", () => ({
   },
 }));
 
-jest.mock("@root/modules/shared/react/hooks/use-translation.hook", () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-    locale: "en",
-  }),
-}));
-
 jest.mock("@amplitude/analytics-browser", () => ({
   init: jest.fn(),
   track: jest.fn(),

@@ -2,7 +2,6 @@ import { Input } from "@root/modules/shared/react/components/ui/Input";
 import { Label } from "@root/modules/shared/react/components/ui/Label";
 import { LabelInputContainer } from "@root/modules/shared/react/components/ui/LabelInputContainer";
 import { CircleAlert } from "lucide-react";
-import { useTranslation } from "@root/modules/shared/react/hooks/use-translation.hook";
 
 type InputWithLabelProps = {
   id: string;
@@ -47,13 +46,12 @@ export default function InputWithLabel({
 }
 
 const ErrorMessage = () => {
-  const { t } = useTranslation("common");
 
   return (
     <div className="flex items-center gap-1">
       <CircleAlert size={16} className="text-red-500" />
       <h3 className="text-red-500 text-xs">
-        {t("clients.new.validations.invalid")}
+nul
       </h3>
     </div>
   );

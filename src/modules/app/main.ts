@@ -1,3 +1,4 @@
+import { InMemoryStuffsGateway } from "@root/modules/dofus/gateways-impl/in-memory-stuff.gateway";
 import { InMemoryAnalyticsGateway } from "@root/modules/global/gateways-impl/in-memory-analytics.gateway";
 import { LocalStorageProvider } from "@root/modules/global/providers-impl/local-storage.provider";
 
@@ -25,6 +26,7 @@ export class App {
 
       /** GATEWAYS */
       analyticsGateway: new InMemoryAnalyticsGateway(),
+      stuffsGateway: new InMemoryStuffsGateway(),
     };
   }
 }
