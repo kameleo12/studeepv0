@@ -29,7 +29,7 @@ export function BaseStuffItem({
       <div className="relative w-[250px] overflow-hidden rounded-xl transition-all duration-300 hover:bg-gray-100">
         <div className="absolute left-2 top-2 z-20">
           <div className="rounded-lg bg-primary/90 px-3 py-1.5 text-sm font-bold text-white shadow-md">
-            ⚡ {stuff.power}
+            ⚡ {stuff.level}
           </div>
         </div>
         <div className="relative block">
@@ -66,7 +66,7 @@ export function BaseStuffItem({
             {stuff.items.description}
           </h3>
           <p className="mt-1 text-xs font-medium text-gray-600">
-            Item power: {stuff.items.power}
+            level: {stuff.level}
           </p>
           <p className="mt-0.5 text-xs text-gray-500">
             Health: {stuff.items.health}

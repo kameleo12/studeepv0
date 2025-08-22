@@ -42,7 +42,7 @@ export class InMemoryStuffsGateway implements IStuffsGateway {
       id: "1",
       uploadedAt: dayjs().subtract(6, "months").toISOString(),
       thumbnail: "https://picsum.photos/seed/stuff1/200/300",
-      power: 84,
+      level: 84,
       items: {
         thumbnail: "https://picsum.photos/seed/stuff1-item/200/300",
         power: 18,
@@ -54,7 +54,7 @@ export class InMemoryStuffsGateway implements IStuffsGateway {
       id: "2",
       uploadedAt: dayjs().subtract(2, "months").toISOString(),
       thumbnail: "https://picsum.photos/seed/stuff2/200/300",
-      power: 70,
+      level: 70,
       items: {
         thumbnail: "https://picsum.photos/seed/stuff2-item/200/300",
         power: 12,
@@ -66,7 +66,7 @@ export class InMemoryStuffsGateway implements IStuffsGateway {
       id: "3",
       uploadedAt: dayjs().subtract(2, "months").toISOString(),
       thumbnail: "https://picsum.photos/seed/stuff3/200/300",
-      power: 80,
+      level: 80,
       items: {
         thumbnail: "https://picsum.photos/seed/stuff3-item/200/300",
         power: 20,
@@ -78,7 +78,7 @@ export class InMemoryStuffsGateway implements IStuffsGateway {
       id: "4",
       uploadedAt: dayjs().subtract(1, "month").toISOString(),
       thumbnail: "https://picsum.photos/seed/stuff4/200/300",
-      power: 60,
+      level: 60,
       items: {
         thumbnail: "https://picsum.photos/seed/stuff4-item/200/300",
         power: 9,
@@ -90,7 +90,7 @@ export class InMemoryStuffsGateway implements IStuffsGateway {
       id: "5",
       uploadedAt: dayjs().subtract(7, "months").toISOString(),
       thumbnail: "https://picsum.photos/seed/stuff5/200/300",
-      power: 99,
+      level: 99,
       items: {
         thumbnail: "https://picsum.photos/seed/stuff5-item/200/300",
         power: 25,
@@ -102,7 +102,7 @@ export class InMemoryStuffsGateway implements IStuffsGateway {
       id: "6",
       uploadedAt: dayjs().subtract(2, "months").toISOString(),
       thumbnail: "https://picsum.photos/seed/stuff6/200/300",
-      power: 100,
+      level: 100,
       items: {
         thumbnail: "https://picsum.photos/seed/stuff6-item/200/300",
         power: 30,

@@ -70,8 +70,8 @@ export default function StuffDetails() {
 
           <dl className="grid grid-cols-2 gap-3 text-sm">
             <div>
-              <dt className="text-gray-500">Power</dt>
-              <dd className="font-medium">{stuff.power}</dd>
+              <dt className="text-gray-500">level</dt>
+              <dd className="font-medium">{stuff.level}</dd>
             </div>
             <div>
               <dt className="text-gray-500">Health</dt>

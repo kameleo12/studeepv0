@@ -9,7 +9,7 @@ export class StuffFactory {
       id: "1",
       uploadedAt: dayjs().subtract(6, "months").toISOString(),
       thumbnail: "thumbnail",
-      power: 42,
+      level: 42,
       items: {
         thumbnail: "item-thumbnail",
         power: 10,

@@ -3,7 +3,7 @@ export namespace StuffDomainModel {
         id: string;
         uploadedAt: string;
         thumbnail: string;
-        power: number;
+        level: number;
         items: StuffItems;
     }
 
