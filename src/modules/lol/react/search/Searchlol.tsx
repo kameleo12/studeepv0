@@ -8,22 +8,12 @@ import { useAppDispatch } from "@root/modules/store/store";
 import { getStuffResults } from "@root/modules/dofus/core/usecase/get-results.usecase";
 import { useSearchResultsStuff } from "@root/modules/dofus/react/search/hooks/use-search-results.hook";
 import { searchStuffs } from "@root/modules/dofus/core/usecase/search-stuff.usecase";
-import { useEffect } from "react";
+
 
 export default function Search() {
   const { stuffs, hasStarted, isLoading, searchId } = useSearchResultsStuff();
-  const dispatch = useAppDispatch();
 
-  // 🌟 Chargement initial : afficher tous les stuffs par défaut
-  useEffect(() => {
-    const loadDefault = async () => {
-      // évite de relancer si déjà démarré (ex: navigation ou retour)
-      if (hasStarted) return;
-      const { searchId } = await dispatch(searchStuffs({ query: "" })).unwrap();
-      await dispatch(getStuffResults({ searchId }));
-    };
-    loadDefault();
-  }, [dispatch, hasStarted]);
+  const dispatch = useAppDispatch();
 
   const onSearch = async (query: string) => {
     const { searchId } = await dispatch(searchStuffs({ query })).unwrap();
@@ -54,7 +44,7 @@ export default function Search() {
                   transition={{ duration: 0.5 }}
                   className="text-5xl md:text-6xl font-extrabold text-center leading-tight mb-2"
                 >
-                  Stuff
+                  Item
                 </motion.h1>
               )}
             </AnimatePresence>
