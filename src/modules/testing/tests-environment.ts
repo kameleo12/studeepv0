@@ -2,8 +2,9 @@ import { createStore } from "../store/store";
 import { Dependencies } from "../store/dependencies";
 import { StubStorageProvider } from "../global/core/testing/stub-storage.provider";
 import { InMemoryAnalyticsGateway } from "../global/gateways-impl/in-memory-analytics.gateway";
-import { InMemoryCharactersGateway } from "../dofus/gateways-impl/in-memory-stuff.gateway";
+
 import { AppState } from "../store/app-state";
+import { InMemoryCharactersGateway } from "@root/modules/dofus/gateways-impl/in-memory-character.gateway";
 
 /**
  * Create testing dependencies with provided defaults

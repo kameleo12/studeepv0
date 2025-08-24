@@ -1,7 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { AppState } from "../../../store/app-state";
 import { getCharacterResults } from "../usecase/get-results.usecase";
-import { searchCharacters } from "../usecase/search-stuff.usecase";
+import { searchCharacters } from "@root/modules/dofus/core/usecase/search-character.usecase";
+
 
 export const charactersSearchingReducer = createReducer<
   AppState["charactersSearching"]

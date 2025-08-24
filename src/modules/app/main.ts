@@ -3,7 +3,7 @@ import axios, { AxiosInstance } from "axios";
 
 import { Dependencies } from "../store/dependencies";
 import { AppStore, createStore } from "../store/store";
-import { InMemoryCharactersGateway } from "../dofus/gateways-impl/in-memory-stuff.gateway";
+import { InMemoryCharactersGateway } from "../dofus/gateways-impl/in-memory-character.gateway";
 import { LocalStorageProvider } from "../global/providers-impl/local-storage.provider";
 import { InMemoryAnalyticsGateway } from "../global/gateways-impl/in-memory-analytics.gateway";
 

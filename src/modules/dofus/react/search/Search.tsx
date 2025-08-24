@@ -7,8 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAppDispatch } from "../../../store/store";
 import { getCharacterResults } from "../../core/usecase/get-results.usecase";
 import { useSearchResultsCharacter } from "../search/hooks/use-search-results.hook";
-import { searchCharacters } from "../../core/usecase/search-stuff.usecase";
+
 import { useEffect } from "react";
+import { searchCharacters } from "@root/modules/dofus/core/usecase/search-character.usecase";
 
 export default function Search() {
   const { characters, hasStarted, isLoading, searchId } =

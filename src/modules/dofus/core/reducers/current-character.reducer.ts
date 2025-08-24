@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getCharacterById } from "../usecase/get-stuff-by-id.usecase";
+import { getCharacterById } from "../usecase/get-character-by-id.usecase";
 import { AppState } from "../../../store/app-state";
 
 export const currentCharacterReducer = createReducer<

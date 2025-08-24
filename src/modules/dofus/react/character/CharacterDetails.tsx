@@ -1,4 +1,3 @@
-// @root/modules/dofus/react/stuff/StuffDetails.tsx
 "use client";
 
 import { useEffect } from "react";
@@ -8,8 +7,8 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../store/store";
 import { AppState } from "../../../store/app-state";
 import SearchNavbar from "../search/components/SearchNavbar";
-import { motion } from "framer-motion";
-import { getCharacterById } from "../../core/usecase/get-stuff-by-id.usecase";
+// (motion import optionnel, non utilisé ici) import { motion } from "framer-motion";
+import { getCharacterById } from "../../core/usecase/get-character-by-id.usecase";
 
 export default function CharacterDetails() {
   const { id } = useParams<{ id: string }>();
@@ -18,12 +17,12 @@ export default function CharacterDetails() {
 
   const dispatch = useAppDispatch();
 
-  const loading = useSelector((s: AppState) => s.currentStuff.loading);
-  const stuff = useSelector((s: AppState) => s.currentStuff.stuff);
+  const loading = useSelector((s: AppState) => s.currentCharacter.loading);
+  const character = useSelector((s: AppState) => s.currentCharacter.character);
 
   useEffect(() => {
     if (id) {
-      // Note: signature getById(stuffId, searchId)
+      // signature: getCharacterById({ characterId, searchId })
       dispatch(getCharacterById({ characterId: String(id), searchId }));
     }
   }, [id, searchId, dispatch]);
@@ -36,10 +35,10 @@ export default function CharacterDetails() {
     );
   }
 
-  if (!stuff) {
+  if (!character) {
     return (
       <section className="max-w-3xl mx-auto p-6">
-        <h1 className="text-xl font-semibold">Perso introuvable</h1>
+        <h1 className="text-xl font-semibold">Personnage introuvable</h1>
         <p className="text-gray-500">
           Aucun élément avec l’id <code>{String(id)}</code>.
         </p>
@@ -54,8 +53,8 @@ export default function CharacterDetails() {
         <div className="flex gap-6">
           <div className="w-64 shrink-0">
             <Image
-              src={stuff.thumbnail}
-              alt={stuff.id}
+              src={character.thumbnail}
+              alt={character.name}
               width={256}
               height={256}
               className="rounded-xl object-cover w-64 h-64"
@@ -63,14 +62,15 @@ export default function CharacterDetails() {
           </div>
 
           <div className="flex-1">
-            <h1 className="text-2xl font-bold mb-2">{stuff.name}</h1>
+            <h1 className="text-2xl font-bold mb-2">{character.name}</h1>
+
             <div className="mt-4">
               <h2 className="text-lg font-semibold mb-2">Sorts</h2>
-              {stuff.spells.length === 0 ? (
+              {character.spells.length === 0 ? (
                 <p className="text-gray-500">Aucun sort.</p>
               ) : (
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {stuff.spells.map((spell) => (
+                  {character.spells.map((spell) => (
                     <li key={spell.id} className="p-3 border rounded-lg">
                       {spell.name}
                     </li>

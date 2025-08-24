@@ -7,7 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 import { Dependencies } from "./dependencies";
 import { AppState } from "./app-state";
-import { currentCharacterReducer as currentCharacter } from "../dofus/core/reducers/current-stuff.reducer";
+import { currentCharacterReducer as currentCharacter } from "../dofus/core/reducers/current-character.reducer";
 import { charactersSearchingReducer as charactersSearching } from "../dofus/core/reducers/search-results.reducer";
 
 const reducers = combineReducers({

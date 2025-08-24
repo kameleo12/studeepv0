@@ -1,7 +1,7 @@
-import { CharacterDomainModel } from "../dofus/core/model/stuff.domain-model";
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
+
 
 export interface AppState {
-  currentStuff: any;
   charactersSearching: {
     results: CharacterDomainModel.Character[];
     query: string;

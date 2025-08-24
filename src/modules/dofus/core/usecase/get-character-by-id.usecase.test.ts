@@ -1,9 +1,10 @@
-import { getCharacterById } from "./get-stuff-by-id.usecase";
+import { getCharacterById } from "./get-character-by-id.usecase";
 import { createTestStore } from "../../../testing/tests-environment";
-import { AppStore, AppDispatch } from "../../../store/store";
-import { CharacterDomainModel } from "../model/stuff.domain-model";
-import { StubCharactersGateway } from "../../gateways-impl/stub-stuffs.gateway";
-import { createCharacterFixture } from "../testing/stuff.fixture";
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
+import { createCharacterFixture } from "@root/modules/dofus/core/testing/character.fixture";
+import { StubCharactersGateway } from "@root/modules/dofus/gateways-impl/stub-characters.gateway";
+import { AppStore, AppDispatch } from "@root/modules/store/store";
+
 
 describe("Get character by id", () => {
   let store: AppStore;

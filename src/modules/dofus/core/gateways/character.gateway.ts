@@ -1,4 +1,4 @@
-import { CharacterDomainModel } from "../model/stuff.domain-model";
+import { CharacterDomainModel } from "../model/character.domain-model";
 
 export interface ICharactersGateway {
   searchByKeyword(keyword: string): Promise<{ searchId: string }>;

@@ -2,11 +2,12 @@ import { AppDispatch, AppStore } from "../../../store/store";
 import { createTestStore } from "../../../testing/tests-environment";
 
 import { createInitialState } from "../../../global/core/testing/app-state.fixture";
-import { ICharactersGateway } from "../gateways/stuff.gateway";
-import { CharacterDomainModel } from "../model/stuff.domain-model";
-import { getCharacterResults } from "../usecase/get-results.usecase";
-import { StubCharactersGateway } from "../../gateways-impl/stub-stuffs.gateway";
-import { createCharacterFixture } from "../testing/stuff.fixture";
+import { ICharactersGateway } from "@root/modules/dofus/core/gateways/character.gateway";
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
+import { createCharacterFixture } from "@root/modules/dofus/core/testing/character.fixture";
+import { getCharacterResults } from "@root/modules/dofus/core/usecase/get-results.usecase";
+import { StubCharactersGateway } from "@root/modules/dofus/gateways-impl/stub-characters.gateway";
+
 
 describe("Get Character Results", () => {
   let charactersGateway: ICharactersGateway;

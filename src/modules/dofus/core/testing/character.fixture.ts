@@ -1,5 +1,5 @@
-import { CharacterDomainModel } from "../model/stuff.domain-model";
-import { CharacterFactory } from "../model/stuff.factory";
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
+import { CharacterFactory } from "@root/modules/dofus/core/model/character.factory";
 
 export const createCharacterFixture = (
   overrides: Partial<CharacterDomainModel.Character> = {}

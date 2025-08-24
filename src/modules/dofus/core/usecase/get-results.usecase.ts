@@ -1,4 +1,5 @@
-import { CharacterDomainModel } from "../model/stuff.domain-model";
+
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
 import { createAppAsyncThunk } from "../../../store/create-app-async-thunk";
 
 export const getCharacterResults = createAppAsyncThunk<

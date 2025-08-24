@@ -1,9 +1,9 @@
 "use client";
 
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
 import Image from "next/image";
 import { ReactNode } from "react";
-import { Copy } from "lucide-react";
-import { CharacterDomainModel } from "../../../../dofus/core/model/stuff.domain-model";
+
 
 export interface BaseCharacterItemProps {
   character: CharacterDomainModel.Character;

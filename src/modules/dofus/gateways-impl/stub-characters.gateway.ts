@@ -1,5 +1,6 @@
-import { ICharactersGateway } from "../core/gateways/stuff.gateway";
-import { CharacterDomainModel } from "../core/model/stuff.domain-model";
+import { ICharactersGateway } from "@root/modules/dofus/core/gateways/character.gateway";
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
+
 
 export class StubCharactersGateway implements ICharactersGateway {
   constructor(

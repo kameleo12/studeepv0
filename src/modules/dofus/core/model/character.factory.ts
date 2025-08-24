@@ -1,4 +1,5 @@
-import { CharacterDomainModel } from "./stuff.domain-model";
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
+
 
 export class CharacterFactory {
   static create(

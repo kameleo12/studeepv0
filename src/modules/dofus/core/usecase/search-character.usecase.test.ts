@@ -1,11 +1,12 @@
-import { ICharactersGateway } from "../gateways/stuff.gateway";
-import { CharacterDomainModel } from "../model/stuff.domain-model";
-import { createCharacterFixture } from "../testing/stuff.fixture";
-import { searchCharacters } from "../usecase/search-stuff.usecase";
-import { StubCharactersGateway } from "../../gateways-impl/stub-stuffs.gateway";
+
+import { searchCharacters } from "../usecase/search-character.usecase";
+import { StubCharactersGateway } from "../../gateways-impl/stub-characters.gateway";
 
 import { AppDispatch, AppStore } from "../../../store/store";
 import { createTestStore } from "../../../testing/tests-environment";
+import { ICharactersGateway } from "@root/modules/dofus/core/gateways/character.gateway";
+import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
+import { createCharacterFixture } from "@root/modules/dofus/core/testing/character.fixture";
 
 describe("Search Characters", () => {
   let charactersGateway: ICharactersGateway;

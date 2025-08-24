@@ -3,7 +3,7 @@ import { AppState } from "@root/modules/store/app-state";
 
 export const createInitialState = (state?: Partial<AppState>): AppState => ({
  
-    stuffsSearching: {
+    charactersSearching: {
           results: [],
           query: "testquery",
           loading: false,
@@ -11,8 +11,8 @@ export const createInitialState = (state?: Partial<AppState>): AppState => ({
           searchId: "search-id",
         },
 
-        currentStuff: {
-          stuff: null,
+        currentCharacter: {
+          character: null,
           loading: false,
         },
   ...state,
