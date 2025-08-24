@@ -1,7 +1,7 @@
-import { IAnalyticsGateway } from "@root/modules/global/core/gateways/analytics.gateway";
-import { IStorageProvider } from "@root/modules/global/core/providers/storage.provider";
+import { IAnalyticsGateway } from "../global/core/gateways/analytics.gateway";
+import { IStorageProvider } from "../global/core/providers/storage.provider";
 
-import { IStuffsGateway } from "@root/modules/dofus/core/gateways/stuff.gateway";
+import { ICharactersGateway } from "../dofus/core/gateways/stuff.gateway";
 
 export type Dependencies = {
   /* PROVIDERS */
@@ -10,5 +10,5 @@ export type Dependencies = {
   /* GATEWAYS */
   analyticsGateway: IAnalyticsGateway;
 
-  stuffsGateway: IStuffsGateway;
+  charactersGateway: ICharactersGateway;
 };

@@ -1,14 +1,13 @@
 "use client";
 
-import { SearchStuffItem } from "@root/modules/dofus/react/search/components/SearchItem";
-import { useSearchResultsStuff } from "@root/modules/dofus/react/search/hooks/use-search-results.hook";
-import { Skeleton } from "@root/modules/shared/react/components/ui/Skeleton";
-
+import { SearchCharacterItem } from "../components/SearchItem";
+import { useSearchResultsCharacter } from "../hooks/use-search-results.hook";
+import { Skeleton } from "../../../../shared/react/components/ui/Skeleton";
 import { motion } from "framer-motion";
 
-
 export default function SearchResults() {
-  const { stuffs, hasStarted, isLoading, searchId } = useSearchResultsStuff();
+  const { characters, hasStarted, isLoading, searchId } =
+    useSearchResultsCharacter();
 
   if (!hasStarted) return null;
 
@@ -23,10 +22,9 @@ export default function SearchResults() {
       >
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-bold">Résultat des stuffs</h2>
+            <h2 className="text-2xl font-bold">Résultat des personnages</h2>
             <p className="text-gray-500">Chargement</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Array.from({ length: 10 }).map((_, index) => (
               <Skeleton key={index} className="w-[230px] h-[340px]" />
@@ -48,21 +46,17 @@ export default function SearchResults() {
             transition={{ duration: 0.5 }}
             className="text-2xl font-bold"
           >
-           Résultat des stuffs
+            Résultat des personnages
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
-            className="text-gray-500"
-          >
-          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {stuffs.map((stuff) => (
-            <SearchStuffItem key={stuff.id} stuff={stuff} searchId={searchId} />
+          {characters.map((character) => (
+            <SearchCharacterItem
+              key={character.id}
+              character={character}
+              searchId={searchId}
+            />
           ))}
         </div>
       </div>

@@ -1,10 +1,11 @@
-import { InMemoryStuffsGateway } from "@root/modules/dofus/gateways-impl/in-memory-stuff.gateway";
-import { InMemoryAnalyticsGateway } from "@root/modules/global/gateways-impl/in-memory-analytics.gateway";
-import { LocalStorageProvider } from "@root/modules/global/providers-impl/local-storage.provider";
-
-import { Dependencies } from "@root/modules/store/dependencies";
-import { AppStore, createStore } from "@root/modules/store/store";
+// src/modules/app/main.ts
 import axios, { AxiosInstance } from "axios";
+
+import { Dependencies } from "../store/dependencies";
+import { AppStore, createStore } from "../store/store";
+import { InMemoryCharactersGateway } from "../dofus/gateways-impl/in-memory-stuff.gateway";
+import { LocalStorageProvider } from "../global/providers-impl/local-storage.provider";
+import { InMemoryAnalyticsGateway } from "../global/gateways-impl/in-memory-analytics.gateway";
 
 export class App {
   public dependencies: Dependencies;
@@ -12,9 +13,7 @@ export class App {
   public httpClient: AxiosInstance;
 
   constructor() {
-    this.httpClient = axios.create({
-      baseURL: "",
-    });
+    this.httpClient = axios.create({ baseURL: "" });
     this.dependencies = this.setupDependencies();
     this.store = createStore({ dependencies: this.dependencies });
   }
@@ -26,7 +25,7 @@ export class App {
 
       /** GATEWAYS */
       analyticsGateway: new InMemoryAnalyticsGateway(),
-      stuffsGateway: new InMemoryStuffsGateway(),
+      charactersGateway: new InMemoryCharactersGateway(),
     };
   }
 }

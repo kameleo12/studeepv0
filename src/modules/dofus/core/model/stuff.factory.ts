@@ -1,21 +1,18 @@
-import { StuffDomainModel } from "./stuff.domain-model";
-import dayjs from "dayjs";
+import { CharacterDomainModel } from "./stuff.domain-model";
 
-export class StuffFactory {
+export class CharacterFactory {
   static create(
-    overrides: Partial<StuffDomainModel.Stuff> = {}
-  ): StuffDomainModel.Stuff {
+    overrides: Partial<CharacterDomainModel.Character> = {}
+  ): CharacterDomainModel.Character {
     return {
       id: "1",
-      uploadedAt: dayjs().subtract(6, "months").toISOString(),
-      thumbnail: "thumbnail",
-      level: 42,
-      items: {
-        thumbnail: "item-thumbnail",
-        power: 10,
-        health: 100,
-        description: "A sample item",
-      },
+      name: "Iop",
+      thumbnail: "https://picsum.photos/seed/iop/200/300",
+      spells: [
+        { id: "iop_1", name: "Pressure" },
+        { id: "iop_2", name: "Intimidation" },
+        { id: "iop_3", name: "Jump" },
+      ],
       ...overrides,
     };
   }

@@ -1,24 +1,16 @@
-// @root/modules/search/react/hooks/use-search-results-stuff.hook.ts
 import { useSelector } from "react-redux";
-import { AppState } from "@root/modules/store/app-state";
+import { AppState } from "../../../../store/app-state";
 
-const selectStuffSearchResults = (state: AppState) => {
-  const s = state.stuffsSearching;
+const selectCharacterSearchResults = (state: AppState) => {
+  const s = state.charactersSearching;
   return {
-    stuffs: s.results,
+    characters: s.results,
     hasStarted: s.started,
     isLoading: s.loading,
     searchId: s.searchId,
   };
 };
 
-export const useSearchResultsStuff = () => {
-  const baseSearchResults = useSelector(selectStuffSearchResults);
-
-  return {
-    stuffs: baseSearchResults.stuffs,
-    hasStarted: baseSearchResults.hasStarted,
-    isLoading: baseSearchResults.isLoading,
-    searchId: baseSearchResults.searchId,
-  };
+export const useSearchResultsCharacter = () => {
+  return useSelector(selectCharacterSearchResults);
 };

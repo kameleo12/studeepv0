@@ -1,17 +1,13 @@
-export namespace StuffDomainModel {
-    export type Stuff = {
-        id: string;
-        uploadedAt: string;
-        thumbnail: string;
-        level: number;
-        items: StuffItems;
-    }
+export namespace CharacterDomainModel {
+  export type Spell = {
+    id: string;
+    name: string;
+  };
 
-    export type StuffItems = {
-        thumbnail: string;
-        power: number;
-        health: number;
-        description: string;
-
-    }
+  export type Character = {
+    id: string;
+    name: string;
+    thumbnail: string;
+    spells: Spell[];
+  };
 }

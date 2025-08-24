@@ -1,27 +1,25 @@
-import { createStore } from "@root/modules/store/store";
-import { Dependencies } from "@root/modules/store/dependencies";
-import { StubStorageProvider } from "@root/modules/global/core/testing/stub-storage.provider";
-import { InMemoryAnalyticsGateway } from "@root/modules/global/gateways-impl/in-memory-analytics.gateway";
-import { AppState } from "@root/modules/store/app-state";
+import { createStore } from "../store/store";
+import { Dependencies } from "../store/dependencies";
+import { StubStorageProvider } from "../global/core/testing/stub-storage.provider";
+import { InMemoryAnalyticsGateway } from "../global/gateways-impl/in-memory-analytics.gateway";
+import { InMemoryCharactersGateway } from "../dofus/gateways-impl/in-memory-stuff.gateway";
+import { AppState } from "../store/app-state";
 
 /**
  * Create testing dependencies with provided defaults
- * @param dependencies
- * @returns
  */
 const createDependencies = (
   dependencies?: Partial<Dependencies>
 ): Dependencies => ({
   analyticsGateway: new InMemoryAnalyticsGateway(),
   storageProvider: new StubStorageProvider(),
-
+  // ✅ indispensable depuis la migration
+  charactersGateway: new InMemoryCharactersGateway(),
   ...dependencies,
 });
 
 /**
  * Creates store initialized with a partial state
- * @param config
- * @returns
  */
 export const createTestStore = (config?: {
   initialState?: Partial<AppState>;
@@ -31,10 +29,11 @@ export const createTestStore = (config?: {
     dependencies: createDependencies(config?.dependencies),
   });
 
-  const initialState = {
+  // ✅ assure à TS qu'on fournit bien un AppState complet
+  const initialState: AppState = {
     ...initialStore.getState(),
     ...config?.initialState,
-  };
+  } as AppState;
 
   const store = createStore({
     initialState,
@@ -46,8 +45,6 @@ export const createTestStore = (config?: {
 
 /**
  * Useful for testing selectors without setting redux up
- * @param partialState
- * @returns
  */
 export const createTestState = (partialState?: Partial<AppState>) => {
   const store = createStore({
@@ -56,10 +53,10 @@ export const createTestState = (partialState?: Partial<AppState>) => {
 
   const storeInitialState = store.getState();
 
-  const merged = {
+  const merged: AppState = {
     ...storeInitialState,
     ...partialState,
-  };
+  } as AppState;
 
   return createTestStore({ initialState: merged }).getState();
 };

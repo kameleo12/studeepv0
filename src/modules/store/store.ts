@@ -5,14 +5,14 @@ import {
   combineReducers,
   configureStore,
 } from "@reduxjs/toolkit";
-import { Dependencies } from "@root/modules/store/dependencies";
-import { AppState } from "@root/modules/store/app-state";
-import { currentStuffReducer as currentStuff } from "@root/modules/dofus/core/reducers/current-stuff.reducer";
-import { stuffsSearchingReducer as stuffsSearching } from "@root/modules/dofus/core/reducers/search-results.reducer";
+import { Dependencies } from "./dependencies";
+import { AppState } from "./app-state";
+import { currentCharacterReducer as currentCharacter } from "../dofus/core/reducers/current-stuff.reducer";
+import { charactersSearchingReducer as charactersSearching } from "../dofus/core/reducers/search-results.reducer";
 
 const reducers = combineReducers({
-  currentStuff,
-  stuffsSearching,
+  currentCharacter,
+  charactersSearching,
 });
 
 export type AppStore = ReturnType<typeof createStore>;

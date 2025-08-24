@@ -1,10 +1,11 @@
-// @root/modules/search/core/reducers/stuffs-searching.reducer.ts
 import { createReducer } from "@reduxjs/toolkit";
-import { AppState } from "@root/modules/store/app-state";
-import { getStuffResults } from "@root/modules/dofus/core/usecase/get-results.usecase";
-import { searchStuffs } from "@root/modules/dofus/core/usecase/search-stuff.usecase";
+import { AppState } from "../../../store/app-state";
+import { getCharacterResults } from "../usecase/get-results.usecase";
+import { searchCharacters } from "../usecase/search-stuff.usecase";
 
-export const stuffsSearchingReducer = createReducer<AppState["stuffsSearching"]>(
+export const charactersSearchingReducer = createReducer<
+  AppState["charactersSearching"]
+>(
   {
     results: [],
     loading: false,
@@ -13,16 +14,16 @@ export const stuffsSearchingReducer = createReducer<AppState["stuffsSearching"]>
     searchId: "",
   },
   (builder) => {
-    builder.addCase(searchStuffs.pending, (state) => {
+    builder.addCase(searchCharacters.pending, (state) => {
       state.started = true;
       state.loading = true;
     });
 
-    builder.addCase(searchStuffs.fulfilled, (state, action) => {
+    builder.addCase(searchCharacters.fulfilled, (state, action) => {
       state.query = action.payload.query;
       state.searchId = action.payload.searchId;
     });
-    builder.addCase(getStuffResults.fulfilled, (state, action) => {
+    builder.addCase(getCharacterResults.fulfilled, (state, action) => {
       state.results = action.payload;
       state.loading = false;
     });

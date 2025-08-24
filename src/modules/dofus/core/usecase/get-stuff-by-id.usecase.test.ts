@@ -1,59 +1,57 @@
-import { getStuffById } from "./get-stuff-by-id.usecase";
-import { createTestStore } from "@root/modules/testing/tests-environment";
-import { AppStore, AppDispatch } from "@root/modules/store/store";
-import { StuffDomainModel } from "../model/stuff.domain-model";
-import { StubStuffsGateway } from "@root/modules/dofus/gateways-impl/stub-stuffs.gateway";
-import { createStuffFixture } from "@root/modules/dofus/core/testing/stuff.fixture";
+import { getCharacterById } from "./get-stuff-by-id.usecase";
+import { createTestStore } from "../../../testing/tests-environment";
+import { AppStore, AppDispatch } from "../../../store/store";
+import { CharacterDomainModel } from "../model/stuff.domain-model";
+import { StubCharactersGateway } from "../../gateways-impl/stub-stuffs.gateway";
+import { createCharacterFixture } from "../testing/stuff.fixture";
 
-
-
-describe("Get stuff by id", () => {
+describe("Get character by id", () => {
   let store: AppStore;
   let dispatch: AppDispatch;
-  let stuffsGateway: StubStuffsGateway;
-  let stuff1: StuffDomainModel.Stuff;
-  let stuff2: StuffDomainModel.Stuff;
+  let charactersGateway: StubCharactersGateway;
+  let char1: CharacterDomainModel.Character;
+  let char2: CharacterDomainModel.Character;
 
   beforeEach(() => {
-    stuff1 = createStuffFixture({ id: "1" });
-    stuff2 = createStuffFixture({ id: "2" });
+    char1 = createCharacterFixture({ id: "1" });
+    char2 = createCharacterFixture({ id: "2" });
 
-    stuffsGateway = new StubStuffsGateway("search-id", [stuff1, stuff2]);
+    charactersGateway = new StubCharactersGateway("search-id", [char1, char2]);
 
     store = createTestStore({
       initialState: {
-        stuffsSearching: {
-          results: [stuff1, stuff2],
+        charactersSearching: {
+          results: [char1, char2],
           query: "testquery",
           loading: false,
           started: true,
           searchId: "search-id",
         },
-        currentStuff: {
-          stuff: stuff1,
+        currentCharacter: {
+          character: char1,
           loading: false,
         },
       },
       dependencies: {
-        stuffsGateway,
+        charactersGateway,
       },
     });
 
     dispatch = store.dispatch;
   });
 
-  it("Should get the stuff by id and handle loading state", async () => {
-    expect(store.getState().currentStuff.loading).toBe(false);
+  it("Should get the character by id and handle loading state", async () => {
+    expect(store.getState().currentCharacter.loading).toBe(false);
 
     const promise = dispatch(
-      getStuffById({ stuffId: stuff1.id, searchId: "search-id" })
+      getCharacterById({ characterId: char1.id, searchId: "search-id" })
     );
 
-    expect(store.getState().currentStuff.loading).toBe(true);
+    expect(store.getState().currentCharacter.loading).toBe(true);
 
     await promise;
 
-    expect(store.getState().currentStuff.loading).toBe(false);
-    expect(store.getState().currentStuff.stuff).toEqual(stuff1);
+    expect(store.getState().currentCharacter.loading).toBe(false);
+    expect(store.getState().currentCharacter.character).toEqual(char1);
   });
 });

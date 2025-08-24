@@ -1,51 +1,48 @@
-// @root/modules/dofus/core/usecase/__tests__/search-stuffs.usecase.spec.ts
-import { IStuffsGateway } from "@root/modules/dofus/core/gateways/stuff.gateway";
-import { StuffDomainModel } from "@root/modules/dofus/core/model/stuff.domain-model";
-import { createStuffFixture } from "@root/modules/dofus/core/testing/stuff.fixture";
-import { searchStuffs } from "@root/modules/dofus/core/usecase/search-stuff.usecase";
-import { StubStuffsGateway } from "@root/modules/dofus/gateways-impl/stub-stuffs.gateway";
+import { ICharactersGateway } from "../gateways/stuff.gateway";
+import { CharacterDomainModel } from "../model/stuff.domain-model";
+import { createCharacterFixture } from "../testing/stuff.fixture";
+import { searchCharacters } from "../usecase/search-stuff.usecase";
+import { StubCharactersGateway } from "../../gateways-impl/stub-stuffs.gateway";
 
+import { AppDispatch, AppStore } from "../../../store/store";
+import { createTestStore } from "../../../testing/tests-environment";
 
-import { AppDispatch, AppStore } from "@root/modules/store/store";
-import { createTestStore } from "@root/modules/testing/tests-environment";
-
-
-describe("Search Stuffs", () => {
-  let stuffsGateway: IStuffsGateway;
+describe("Search Characters", () => {
+  let charactersGateway: ICharactersGateway;
   let dispatch: AppDispatch;
   let store: AppStore;
-  let stuff1: StuffDomainModel.Stuff;
-  let stuff2: StuffDomainModel.Stuff;
+  let char1: CharacterDomainModel.Character;
+  let char2: CharacterDomainModel.Character;
 
   beforeEach(() => {
-    stuff1 = createStuffFixture({ id: "1" });
-    stuff2 = createStuffFixture({ id: "2" });
+    char1 = createCharacterFixture({ id: "1" });
+    char2 = createCharacterFixture({ id: "2" });
 
-    stuffsGateway = new StubStuffsGateway("search-id", [stuff1, stuff2]);
+    charactersGateway = new StubCharactersGateway("search-id", [char1, char2]);
 
-    store = createTestStore({ dependencies: { stuffsGateway } });
+    store = createTestStore({ dependencies: { charactersGateway } });
     dispatch = store.dispatch;
   });
 
   it("should update the query in state", async () => {
-    await dispatch(searchStuffs({ query: "query" }));
-    expect(store.getState().stuffsSearching.query).toBe("query");
+    await dispatch(searchCharacters({ query: "query" }));
+    expect(store.getState().charactersSearching.query).toBe("query");
   });
 
   it("should directly mark the search as started (pending)", () => {
-    dispatch(searchStuffs({ query: "Query" }));
-    expect(store.getState().stuffsSearching.started).toBe(true);
-    expect(store.getState().stuffsSearching.loading).toBe(true);
+    dispatch(searchCharacters({ query: "Query" }));
+    expect(store.getState().charactersSearching.started).toBe(true);
+    expect(store.getState().charactersSearching.loading).toBe(true);
   });
 
   it("should call gateway.searchByKeyword", async () => {
-    const spy = jest.spyOn(stuffsGateway, "searchByKeyword");
-    await dispatch(searchStuffs({ query: "query" }));
+    const spy = jest.spyOn(charactersGateway, "searchByKeyword");
+    await dispatch(searchCharacters({ query: "query" }));
     expect(spy).toHaveBeenCalledWith("query");
   });
 
   it("should set the searchId", async () => {
-    await dispatch(searchStuffs({ query: "query" }));
-    expect(store.getState().stuffsSearching.searchId).toBe("search-id");
+    await dispatch(searchCharacters({ query: "query" }));
+    expect(store.getState().charactersSearching.searchId).toBe("search-id");
   });
 });

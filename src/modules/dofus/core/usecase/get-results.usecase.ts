@@ -1,11 +1,11 @@
-import { StuffDomainModel } from "../model/stuff.domain-model";
-import { createAppAsyncThunk } from "@root/modules/store/create-app-async-thunk";
+import { CharacterDomainModel } from "../model/stuff.domain-model";
+import { createAppAsyncThunk } from "../../../store/create-app-async-thunk";
 
-export const getStuffResults = createAppAsyncThunk<
-  StuffDomainModel.Stuff[],
+export const getCharacterResults = createAppAsyncThunk<
+  CharacterDomainModel.Character[],
   { searchId: string }
->("search/getStuffResults", async ({ searchId }, { extra }) => {
-  const { stuffsGateway } = extra;
-  const results = await stuffsGateway.getResults(searchId);
+>("search/getCharacterResults", async ({ searchId }, { extra }) => {
+  const { charactersGateway } = extra;
+  const results = await charactersGateway.getResults(searchId);
   return results;
 });

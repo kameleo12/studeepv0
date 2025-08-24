@@ -6,7 +6,7 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { usePathname, Link } from "@root/modules/shared/react/libs/navigation";
+import { usePathname, Link } from "../../../../shared/react/libs/navigation";
 
 export default function SearchNavbar() {
   const pathname = usePathname();

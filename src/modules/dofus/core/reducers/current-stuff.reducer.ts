@@ -1,26 +1,25 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getStuffById } from "@root/modules/dofus/core/usecase/get-stuff-by-id.usecase";
+import { getCharacterById } from "../usecase/get-stuff-by-id.usecase";
+import { AppState } from "../../../store/app-state";
 
-import { AppState } from "@root/modules/store/app-state";
-
-
-export const currentStuffReducer = createReducer<AppState["currentStuff"]>(
+export const currentCharacterReducer = createReducer<
+  AppState["currentCharacter"]
+>(
   {
-    stuff: null,
+    character: null,
     loading: false,
   },
   (builder) => {
-    builder.addCase(getStuffById.pending, (state) => {
+    builder.addCase(getCharacterById.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getStuffById.fulfilled, (state, action) => {
-      state.stuff = action.payload || null;
+    builder.addCase(getCharacterById.fulfilled, (state, action) => {
+      state.character = action.payload || null;
       state.loading = false;
     });
-    builder.addCase(getStuffById.rejected, (state) => {
-      state.stuff = null;
+    builder.addCase(getCharacterById.rejected, (state) => {
+      state.character = null;
       state.loading = false;
     });
-   
   }
 );

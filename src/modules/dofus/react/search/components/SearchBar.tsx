@@ -1,20 +1,19 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-
 import { SearchIcon } from "lucide-react";
 import {
   Command,
   CommandInput,
-} from "@root/modules/shared/react/components/ui/Command";
-import { useSearchBarStuff } from "@root/modules/dofus/react/search/hooks/use-search-bar.hook";
+} from "../../../../shared/react/components/ui/Command";
+import { useSearchBarCharacter } from "../hooks/use-search-bar.hook";
 
 export default function SearchBar({
   onSearch,
 }: {
   onSearch: (query: string) => void;
 }) {
-  const { query, setQuery, handleSubmit } = useSearchBarStuff({
+  const { query, setQuery, handleSubmit } = useSearchBarCharacter({
     onSearch,
   });
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -47,7 +46,6 @@ export default function SearchBar({
       ref={ref}
       onSubmit={onSubmit}
       className="relative w-full mt-8 mx-auto bg-white"
-      
     >
       <Command
         className={`bg-white relative overflow-visible w-full ${
@@ -58,7 +56,7 @@ export default function SearchBar({
           value={query}
           onValueChange={handleValueChange}
           className="w-full mx-auto border-0 pr-6 py-4 text-gray-900 placeholder:text-gray-500 sm:text-lg sm:leading-6 focus:outline-none focus:ring-0 rounded-lg"
-          placeholder="Chercher un stuff"
+          placeholder="Chercher un personnage"
         />
 
         <button
@@ -67,7 +65,6 @@ export default function SearchBar({
         >
           <SearchIcon className="w-5 h-5 text-white" />
         </button>
-
       </Command>
     </form>
   );

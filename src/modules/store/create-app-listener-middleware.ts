@@ -5,7 +5,7 @@ import {
 import { Dependencies } from "./dependencies";
 
 import { AppDispatch } from "./store";
-import { AppState } from "@root/modules/store/app-state";
+import { AppState } from "./app-state";
 
 export const createAppListenerMiddleware = (dependencies?: Dependencies) => {
   const listenerMiddleware = createListenerMiddleware<

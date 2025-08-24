@@ -1,28 +1,26 @@
+import { AppDispatch, AppStore } from "../../../store/store";
+import { createTestStore } from "../../../testing/tests-environment";
 
+import { createInitialState } from "../../../global/core/testing/app-state.fixture";
+import { ICharactersGateway } from "../gateways/stuff.gateway";
+import { CharacterDomainModel } from "../model/stuff.domain-model";
+import { getCharacterResults } from "../usecase/get-results.usecase";
+import { StubCharactersGateway } from "../../gateways-impl/stub-stuffs.gateway";
+import { createCharacterFixture } from "../testing/stuff.fixture";
 
-import { AppDispatch, AppStore } from "@root/modules/store/store";
-import { createTestStore } from "@root/modules/testing/tests-environment";
-
-import { createInitialState } from "@root/modules/global/core/testing/app-state.fixture";
-import { IStuffsGateway } from "@root/modules/dofus/core/gateways/stuff.gateway";
-import { StuffDomainModel } from "@root/modules/dofus/core/model/stuff.domain-model";
-import { getStuffResults } from "@root/modules/dofus/core/usecase/get-results.usecase";
-import { StubStuffsGateway } from "@root/modules/dofus/gateways-impl/stub-stuffs.gateway";
-import { createStuffFixture } from "@root/modules/dofus/core/testing/stuff.fixture";
-
-describe("Get Stuff Results", () => {
-  let stuffsGateway: IStuffsGateway;
+describe("Get Character Results", () => {
+  let charactersGateway: ICharactersGateway;
   let dispatch: AppDispatch;
   let store: AppStore;
-  let stuff1: StuffDomainModel.Stuff;
-  let stuff2: StuffDomainModel.Stuff;
+  let char1: CharacterDomainModel.Character;
+  let char2: CharacterDomainModel.Character;
 
   beforeEach(() => {
-    stuff1 = createStuffFixture({ id: "1" });
-    stuff2 = createStuffFixture({ id: "2" });
+    char1 = createCharacterFixture({ id: "1" });
+    char2 = createCharacterFixture({ id: "2" });
 
     const state = createInitialState({
-      stuffsSearching: {
+      charactersSearching: {
         searchId: "search-id",
         results: [],
         loading: true,
@@ -31,24 +29,27 @@ describe("Get Stuff Results", () => {
       },
     });
 
-    stuffsGateway = new StubStuffsGateway("search-id", [stuff1, stuff2]);
+    charactersGateway = new StubCharactersGateway("search-id", [char1, char2]);
 
     store = createTestStore({
-      dependencies: { stuffsGateway },
+      dependencies: { charactersGateway },
       initialState: state,
     });
     dispatch = store.dispatch;
   });
 
   it("should get the results", async () => {
-    await dispatch(getStuffResults({ searchId: "search-id" }));
+    await dispatch(getCharacterResults({ searchId: "search-id" }));
 
-    expect(store.getState().stuffsSearching.results).toEqual([stuff1, stuff2]);
+    expect(store.getState().charactersSearching.results).toEqual([
+      char1,
+      char2,
+    ]);
   });
 
   it("should stop loading", async () => {
-    await dispatch(getStuffResults({ searchId: "search-id" }));
+    await dispatch(getCharacterResults({ searchId: "search-id" }));
 
-    expect(store.getState().stuffsSearching.loading).toBe(false);
+    expect(store.getState().charactersSearching.loading).toBe(false);
   });
 });

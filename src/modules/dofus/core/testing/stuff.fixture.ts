@@ -1,9 +1,8 @@
-import { StuffDomainModel } from "@root/modules/dofus/core/model/stuff.domain-model";
-import { StuffFactory } from "@root/modules/dofus/core/model/stuff.factory";
+import { CharacterDomainModel } from "../model/stuff.domain-model";
+import { CharacterFactory } from "../model/stuff.factory";
 
-
-export const createStuffFixture = (
-  overrides: Partial<StuffDomainModel.Stuff> = {}
-): StuffDomainModel.Stuff => {
-  return StuffFactory.create(overrides);
+export const createCharacterFixture = (
+  overrides: Partial<CharacterDomainModel.Character> = {}
+): CharacterDomainModel.Character => {
+  return CharacterFactory.create(overrides);
 };

@@ -1,114 +1,68 @@
-// @root/modules/search/gateways-impl/in-memory-stuff.gateway.ts
-import { IStuffsGateway } from "../core/gateways/stuff.gateway";
-import { StuffDomainModel } from "../core/model/stuff.domain-model";
-import { StuffFactory } from "../core/model/stuff.factory";
-import { wait } from "@root/modules/shared/utils/wait.utils";
-import dayjs from "dayjs";
+import { ICharactersGateway } from "../core/gateways/stuff.gateway";
+import { CharacterDomainModel } from "../core/model/stuff.domain-model";
+import { CharacterFactory } from "../core/model/stuff.factory";
+import { wait } from "../../shared/utils/wait.utils";
 
-export class InMemoryStuffsGateway implements IStuffsGateway {
+export class InMemoryCharactersGateway implements ICharactersGateway {
   private lastQuery = "";
 
   async searchByKeyword(query: string): Promise<{ searchId: string }> {
-    // on mémorise la query pour que getResults puisse filtrer
     this.lastQuery = (query ?? "").trim().toLowerCase();
     return { searchId: "search-id" };
   }
 
-  async getResults(searchId: string): Promise<StuffDomainModel.Stuff[]> {
+  async getResults(
+    searchId: string
+  ): Promise<CharacterDomainModel.Character[]> {
     await wait(3000);
 
-    // Filtrage très simple basé sur la description des items
     const q = this.lastQuery;
-    if (!q) return this.stuffs;
+    if (!q) return this.characters;
 
-    return this.stuffs.filter((s) => {
-      const desc = s.items.description?.toLowerCase() ?? "";
-      return desc.includes(q);
+    return this.characters.filter((c) => {
+      const inName = c.name.toLowerCase().includes(q);
+      const inSpells = c.spells.some((s) => s.name.toLowerCase().includes(q));
+      return inName || inSpells;
     });
   }
 
   async getById(
-    stuffId: string,
-    searchId: string
-  ): Promise<StuffDomainModel.Stuff | undefined> {
-    // même philosophie que le stub TikTok : on ignore searchId dans le stub
-    return this.stuffs.find((s) => s.id === stuffId);
+    characterId: string,
+    _searchId: string
+  ): Promise<CharacterDomainModel.Character | undefined> {
+    return this.characters.find((c) => c.id === characterId);
   }
 
-  // --- Données en mémoire : compatibles avec SearchDomainModel.Stuff ---
-
-  private readonly stuffs: StuffDomainModel.Stuff[] = [
-    StuffFactory.create({
+  // --- Données en mémoire ---
+  private readonly characters: CharacterDomainModel.Character[] = [
+    CharacterFactory.create({
       id: "1",
-      uploadedAt: dayjs().subtract(6, "months").toISOString(),
-      thumbnail: "https://picsum.photos/seed/stuff1/200/300",
-      level: 84,
-      items: {
-        thumbnail: "https://picsum.photos/seed/stuff1-item/200/300",
-        power: 18,
-        health: 92,
-        description: "FIRST single rail mountain module with great handling",
-      },
+      name: "Iop",
+      thumbnail: "https://picsum.photos/seed/iop/200/300",
+      spells: [
+        { id: "iop_1", name: "Pressure" },
+        { id: "iop_2", name: "Intimidation" },
+        { id: "iop_3", name: "Jump" },
+      ],
     }),
-    StuffFactory.create({
+    CharacterFactory.create({
       id: "2",
-      uploadedAt: dayjs().subtract(2, "months").toISOString(),
-      thumbnail: "https://picsum.photos/seed/stuff2/200/300",
-      level: 70,
-      items: {
-        thumbnail: "https://picsum.photos/seed/stuff2-item/200/300",
-        power: 12,
-        health: 88,
-        description: "SECOND snow module optimized for cold environments",
-      },
+      name: "Cra",
+      thumbnail: "https://picsum.photos/seed/cra/200/300",
+      spells: [
+        { id: "cra_1", name: "Magic Arrow" },
+        { id: "cra_2", name: "Frost Arrow" },
+        { id: "cra_3", name: "Retreat Arrow" },
+      ],
     }),
-    StuffFactory.create({
+    CharacterFactory.create({
       id: "3",
-      uploadedAt: dayjs().subtract(2, "months").toISOString(),
-      thumbnail: "https://picsum.photos/seed/stuff3/200/300",
-      level: 80,
-      items: {
-        thumbnail: "https://picsum.photos/seed/stuff3-item/200/300",
-        power: 20,
-        health: 95,
-        description: "THIRD snow module with reinforced chassis",
-      },
-    }),
-    StuffFactory.create({
-      id: "4",
-      uploadedAt: dayjs().subtract(1, "month").toISOString(),
-      thumbnail: "https://picsum.photos/seed/stuff4/200/300",
-      level: 60,
-      items: {
-        thumbnail: "https://picsum.photos/seed/stuff4-item/200/300",
-        power: 9,
-        health: 76,
-        description: "FOURTH compact module suitable for tight tracks",
-      },
-    }),
-    StuffFactory.create({
-      id: "5",
-      uploadedAt: dayjs().subtract(7, "months").toISOString(),
-      thumbnail: "https://picsum.photos/seed/stuff5/200/300",
-      level: 99,
-      items: {
-        thumbnail: "https://picsum.photos/seed/stuff5-item/200/300",
-        power: 25,
-        health: 98,
-        description: "FIFTH high-power module for steep climbs",
-      },
-    }),
-    StuffFactory.create({
-      id: "6",
-      uploadedAt: dayjs().subtract(2, "months").toISOString(),
-      thumbnail: "https://picsum.photos/seed/stuff6/200/300",
-      level: 100,
-      items: {
-        thumbnail: "https://picsum.photos/seed/stuff6-item/200/300",
-        power: 30,
-        health: 90,
-        description: "SIXTH performance module tuned for speed",
-      },
+      name: "Eniripsa",
+      thumbnail: "https://picsum.photos/seed/eniripsa/200/300",
+      spells: [
+        { id: "eni_1", name: "Word of Recovery" },
+        { id: "eni_2", name: "Stimulating Word" },
+      ],
     }),
   ];
 }
