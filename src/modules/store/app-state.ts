@@ -1,5 +1,5 @@
+// modules/store/app-state.ts
 import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
-
 
 export interface AppState {
   charactersSearching: {
@@ -12,5 +12,14 @@ export interface AppState {
   currentCharacter: {
     character: CharacterDomainModel.Character | null;
     loading: boolean;
+  };
+
+
+  characterSlots: {
+
+    byCharacterId: Record<
+      string,
+      [CharacterDomainModel.Spell | null, CharacterDomainModel.Spell | null, CharacterDomainModel.Spell | null]
+    >;
   };
 }

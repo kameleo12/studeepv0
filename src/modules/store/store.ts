@@ -9,10 +9,12 @@ import { Dependencies } from "./dependencies";
 import { AppState } from "./app-state";
 import { currentCharacterReducer as currentCharacter } from "../dofus/core/reducers/current-character.reducer";
 import { charactersSearchingReducer as charactersSearching } from "../dofus/core/reducers/search-results.reducer";
+import { characterSlotsReducer as characterSlots } from "@root/modules/dofus/core/reducers/character-slots.reducer";
 
 const reducers = combineReducers({
   currentCharacter,
   charactersSearching,
+  characterSlots,
 });
 
 export type AppStore = ReturnType<typeof createStore>;
