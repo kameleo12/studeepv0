@@ -2,8 +2,14 @@ import { useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { AppState } from "@root/modules/store/app-state";
 
-export const useSearchBarItems = ({ onSearch }: { onSearch: (query: string) => void }) => {
-  const globalQuery = useSelector((state: AppState) => state.lolItemsSearching.query);
+export const useSearchBarItems = ({
+  onSearch,
+}: {
+  onSearch: (query: string) => void;
+}) => {
+  const globalQuery = useSelector(
+    (state: AppState) => state.lolItemsSearching.query
+  );
 
   const [query, setQuery] = useState(globalQuery);
   const onSearchRef = useRef(onSearch);
@@ -14,7 +20,7 @@ export const useSearchBarItems = ({ onSearch }: { onSearch: (query: string) => v
 
   useEffect(() => {
     if (globalQuery !== query) setQuery(globalQuery);
-  }, [globalQuery, query]);
+  }, [globalQuery]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

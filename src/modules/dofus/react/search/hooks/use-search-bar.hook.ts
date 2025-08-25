@@ -22,7 +22,7 @@ export const useSearchBarCharacter = ({
     if (globalQuery !== query) {
       setQuery(globalQuery);
     }
-  }, [globalQuery, query]);
+  }, [globalQuery]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
