@@ -9,17 +9,19 @@ import { CharacterDomainModel } from "../model/character.domain-model";
 type SlotsTuple = [
   CharacterDomainModel.Spell | null,
   CharacterDomainModel.Spell | null,
+  CharacterDomainModel.Spell | null,
+  CharacterDomainModel.Spell | null,
+  CharacterDomainModel.Spell | null,
+  CharacterDomainModel.Spell | null,
+  CharacterDomainModel.Spell | null,
   CharacterDomainModel.Spell | null
 ];
 
-const emptySlots = (): SlotsTuple => [null, null, null];
+const emptySlots = (): SlotsTuple => [null, null, null, null, null, null, null, null];
 
 export const characterSlotsReducer = createReducer<AppState["characterSlots"]>(
-  {
-    byCharacterId: {},
-  },
+  { byCharacterId: {} },
   (builder) => {
-    // À l’ouverture d’une fiche, s’assurer que les slots existent
     builder.addCase(getCharacterById.fulfilled, (state, action) => {
       const character = action.payload;
       if (!character) return;
@@ -28,22 +30,34 @@ export const characterSlotsReducer = createReducer<AppState["characterSlots"]>(
       }
     });
 
-    // Ajouter/remplacer un spell dans un slot
     builder.addCase(addItemToCharacter.fulfilled, (state, action) => {
-      const { characterId, slotIndex, spell } = action.payload;
-      if (!state.byCharacterId[characterId]) {
-        state.byCharacterId[characterId] = emptySlots();
+      const { characterId, slotIndex, spell } = action.payload as {
+        characterId: string;
+        slotIndex: number; // ⚠️ pense à updater le type dans le usecase
+        spell: CharacterDomainModel.Spell;
+      };
+      const slots = (state.byCharacterId[characterId] ??= emptySlots());
+
+      // Anti-duplicate : libère l'ancien slot si même spell déjà présent
+      const existingIndex = slots.findIndex((s) => s?.id === spell.id);
+      if (existingIndex !== -1 && existingIndex !== slotIndex) {
+        slots[existingIndex] = null;
       }
-      state.byCharacterId[characterId][slotIndex] = spell;
+
+      if (slotIndex >= 0 && slotIndex < slots.length) {
+        slots[slotIndex] = spell;
+      }
     });
 
-    // Vider un slot
     builder.addCase(resetItem.fulfilled, (state, action) => {
-      const { characterId, slotIndex } = action.payload;
-      if (!state.byCharacterId[characterId]) {
-        state.byCharacterId[characterId] = emptySlots();
+      const { characterId, slotIndex } = action.payload as {
+        characterId: string;
+        slotIndex: number; // ⚠️ pense à updater le type dans le usecase
+      };
+      const slots = (state.byCharacterId[characterId] ??= emptySlots());
+      if (slotIndex >= 0 && slotIndex < slots.length) {
+        slots[slotIndex] = null;
       }
-      state.byCharacterId[characterId][slotIndex] = null;
     });
   }
 );
