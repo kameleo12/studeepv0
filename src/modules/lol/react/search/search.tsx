@@ -1,6 +1,6 @@
 "use client";
 
-
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppDispatch } from "@root/modules/store/store";
 import { useEffect } from "react";
@@ -11,7 +11,6 @@ import { getItemResults } from "@root/modules/lol/core/usecase/get-item-results"
 import SearchNavbar from "@root/modules/lol/react/search/components/SearchNavbar";
 import SearchBar from "@root/modules/lol/react/search/components/SearchBar";
 import SearchResults from "@root/modules/lol/react/search/components/SearchResults";
-
 
 export default function Search() {
   const { items, hasStarted, isLoading, searchId } = useSearchResultsItems();
@@ -30,6 +29,9 @@ export default function Search() {
     const { searchId } = await dispatch(searchItems({ query })).unwrap();
     await dispatch(getItemResults({ searchId }));
   };
+
+  // ⚠️ Chemin de destination : change-le si besoin
+  const RUNES_PATH = "/lol/runes";
 
   return (
     <section>
@@ -58,6 +60,26 @@ export default function Search() {
               )}
             </AnimatePresence>
           </motion.div>
+
+          {/* -------- Bouton "Runes" au-dessus de la barre de recherche -------- */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="mb-4 flex justify-center"
+          >
+            <Link
+              href="/lol/runes"
+              aria-label="Aller à la page runes"
+              className="inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2
+                         bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60
+                         dark:bg-neutral-900/80 dark:supports-[backdrop-filter]:bg-neutral-900/60
+                         ring-neutral-300 dark:ring-neutral-700"
+            >
+              Cliquez ici pour faire vos runes
+            </Link>
+          </motion.div>
+          {/* ------------------------------------------------------------------- */}
 
           <motion.div
             initial={{ opacity: 0, y: -20 }}
