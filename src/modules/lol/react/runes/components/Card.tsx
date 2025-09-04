@@ -22,7 +22,7 @@ export default function Card({
       disabled={disabled}
       className={[
         // Base layout
-        "w-full rounded-xl p-3 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-offset-2 text-sm",
+        "w-full rounded-xl p-3 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-offset-2 text-sm ",
 
         // Transitions (couleurs + transform) + GPU
         "transform-gpu transition-colors transition-transform duration-200 ease-out ",

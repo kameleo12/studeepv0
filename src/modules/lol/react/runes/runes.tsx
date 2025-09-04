@@ -39,6 +39,12 @@ export default function RunesPage() {
     loadPreset,
     deletePreset,
 
+    // edit mode
+    editingPresetId,
+    startEditPreset,
+    cancelEditPreset,
+    saveEditedPreset,
+
     // derived
     summary,
   } = useRunesState();
@@ -63,6 +69,13 @@ export default function RunesPage() {
           onSave={savePreset}
           onLoad={loadPreset}
           onDelete={deletePreset}
+          /* --- props édition --- */
+          editingPresetId={editingPresetId}
+          onStartEdit={startEditPreset}
+          onCancelEdit={cancelEditPreset}
+          onSaveEdit={saveEditedPreset}
+          /* --- nouveau : bouton reset (icône à gauche du champ) --- */
+          onResetAll={resetAll}
         />
       </div>
 
@@ -202,7 +215,7 @@ export default function RunesPage() {
               {SHARD_TIERS.map((tier) => (
                 <TierGrid
                   key={tier.id}
-                  tier={tier as any} // RuneTier-compatible (mêmes shape)
+                  tier={tier as any} // RuneTier-compatible (même shape)
                   isActive={(id) => selectedShards[tier.id] === id}
                   onPick={(id) => pickShardOption(tier.id, id)}
                 />

@@ -21,7 +21,6 @@ import {
   RUNE_PATHS,
   SHARD_TIERS,
 } from "@root/modules/lol/gateways-impl/in-memory-runes.gateway";
-
 import {
   makeRuneBuild,
   applyRuneBuild,
@@ -48,6 +47,7 @@ export function useRunesState() {
   // ---- Presets
   const [presetName, setPresetName] = useState("");
   const [presets, setPresets] = useState<RuneBuild[]>([]);
+  const [editingPresetId, setEditingPresetId] = useState<string | null>(null);
 
   useEffect(() => {
     setPresets(runePresetsGateway.list());
@@ -55,6 +55,7 @@ export function useRunesState() {
 
   const refreshPresets = () => setPresets(runePresetsGateway.list());
 
+  /** Création d’un nouveau preset */
   const savePreset = () => {
     if (!presetName.trim()) return;
     const build = makeRuneBuild({
@@ -70,6 +71,44 @@ export function useRunesState() {
     refreshPresets();
   };
 
+  /** Démarrer l’édition d’un preset existant */
+  const startEditPreset = (p: RuneBuild) => {
+    // charge l’état dans la page
+    const next = applyRuneBuild(p);
+    setSelectedPath(next.path);
+    setSelectedSecondaryPath(next.secondaryPath);
+    setSelectedByTier(next.selectedByTier);
+    setSelectedSecondaryByTier(next.selectedSecondaryByTier);
+    setSelectedShards(next.selectedShards);
+
+    // prépare l'UI
+    setPresetName(p.name);
+    setEditingPresetId(p.id);
+  };
+
+  /** Annuler l’édition */
+  const cancelEditPreset = () => {
+    setEditingPresetId(null);
+    setPresetName("");
+  };
+
+  /** Sauver les modifications sur le preset en cours d’édition (upsert avec id) */
+  const saveEditedPreset = () => {
+    if (!editingPresetId || !presetName.trim()) return;
+    const updated = makeRuneBuild({
+      name: presetName.trim(),
+      primaryPath: selectedPath,
+      selectedByTier,
+      secondaryPath: selectedSecondaryPath,
+      selectedSecondaryByTier,
+      selectedShards,
+    });
+    runePresetsGateway.save({ ...updated, id: editingPresetId });
+    setEditingPresetId(null);
+    setPresetName("");
+    refreshPresets();
+  };
+
   const loadPreset = (p: RuneBuild) => {
     const next = applyRuneBuild(p);
     setSelectedPath(next.path);
@@ -81,6 +120,11 @@ export function useRunesState() {
 
   const deletePreset = (id: string) => {
     runePresetsGateway.remove(id);
+    // si on supprime celui qu'on éditait, on reset l'UI d'édition
+    if (editingPresetId === id) {
+      setEditingPresetId(null);
+      setPresetName("");
+    }
     refreshPresets();
   };
 
@@ -94,7 +138,7 @@ export function useRunesState() {
     [selectedSecondaryPath]
   );
 
-  // ---- Handlers domaine
+  // ---- Domaine handlers
   const pickPath = (key: RunePathKey) => {
     setSelectedPath(key);
     setSelectedByTier(initialSelectedByTier());
@@ -204,6 +248,12 @@ export function useRunesState() {
     savePreset,
     loadPreset,
     deletePreset,
+
+    // edit mode
+    editingPresetId,
+    startEditPreset,
+    cancelEditPreset,
+    saveEditedPreset,
 
     // derived
     summary,
