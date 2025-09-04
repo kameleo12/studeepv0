@@ -1,7 +1,7 @@
 // modules/lol/react/runes/RunesPage.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Card from "./components/Card";
@@ -9,6 +9,7 @@ import {
   RunePathKey,
   RuneTierId,
   ShardTierId,
+  RuneBuild,
 } from "@root/modules/lol/core/model/runes.model";
 import {
   initialSelectedByTier,
@@ -23,6 +24,14 @@ import {
   RUNE_PATHS,
   SHARD_TIERS,
 } from "@root/modules/lol/gateways-impl/in-memory-runes.gateway";
+
+// ⬇️ Étape 4 : imports presets (usecases + gateway localStorage)
+import {
+  makeRuneBuild,
+  applyRuneBuild,
+} from "@root/modules/lol/core/usecase/rune-presets.usecase";
+import { runePresetsGateway } from "@root/modules/lol/gateways-impl/localstorage/rune-preset.local";
+
 
 export default function RunesPage() {
   // Primaire
@@ -42,6 +51,46 @@ export default function RunesPage() {
   const [selectedShards, setSelectedShards] = useState<
     Record<ShardTierId, string | null>
   >(initialSelectedShards());
+
+  // ⬇️ Étape 4 : états UI pour presets
+  const [presetName, setPresetName] = useState("");
+  const [presets, setPresets] = useState<RuneBuild[]>([]);
+
+  useEffect(() => {
+    // Charge la liste au montage
+    setPresets(runePresetsGateway.list());
+  }, []);
+
+  const refreshPresets = () => setPresets(runePresetsGateway.list());
+
+  const handleSavePreset = () => {
+    if (!presetName.trim()) return;
+    const build = makeRuneBuild({
+      name: presetName.trim(),
+      primaryPath: selectedPath,
+      selectedByTier,
+      secondaryPath: selectedSecondaryPath,
+      selectedSecondaryByTier,
+      selectedShards,
+    });
+    runePresetsGateway.save(build); // upsert (nouveau si pas d'id)
+    setPresetName("");
+    refreshPresets();
+  };
+
+  const handleLoadPreset = (p: RuneBuild) => {
+    const next = applyRuneBuild(p);
+    setSelectedPath(next.path);
+    setSelectedSecondaryPath(next.secondaryPath);
+    setSelectedByTier(next.selectedByTier);
+    setSelectedSecondaryByTier(next.selectedSecondaryByTier);
+    setSelectedShards(next.selectedShards);
+  };
+
+  const handleDeletePreset = (id: string) => {
+    runePresetsGateway.remove(id);
+    refreshPresets();
+  };
 
   const currentPath = useMemo(
     () => RUNE_PATHS.find((p) => p.key === selectedPath) ?? null,
@@ -213,7 +262,6 @@ export default function RunesPage() {
                                   <img
                                     src={opt.thumbnail}
                                     alt={opt.name}
-                                    className="h-9 w-9 rounded-md object-cover shrink-0 "
                                     loading="lazy"
                                   />
                                 )}
@@ -335,7 +383,6 @@ export default function RunesPage() {
                                     <img
                                       src={opt.thumbnail}
                                       alt={opt.name}
-                                      className="h-9 w-9 rounded-md object-cover shrink-0"
                                       loading="lazy"
                                     />
                                   )}
@@ -391,7 +438,6 @@ export default function RunesPage() {
                               <img
                                 src={opt.thumbnail}
                                 alt={opt.name}
-                                className="h-9 w-9 rounded-md object-cover shrink-0"
                                 loading="lazy"
                               />
                             )}
@@ -457,16 +503,14 @@ export default function RunesPage() {
                 </ul>
                 <div className="mt-4 flex justify-center">
                   <button
-  type="button"
-  onClick={handleResetAll}
-  className="px-2.5 py-1.5 rounded-lg cursor-pointer 
+                    type="button"
+                    onClick={handleResetAll}
+                    className="px-2.5 py-1.5 rounded-lg cursor-pointer 
              transition-shadow transition-transform duration-300 ease-out
              hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:-translate-y-0.5"
->
-  Réinitialiser toutes les runes
-</button>
-
-
+                  >
+                    Réinitialiser toutes les runes
+                  </button>
                 </div>
               </>
             ) : (
@@ -475,6 +519,73 @@ export default function RunesPage() {
               </div>
             )}
           </div>
+        </div>
+      </div>
+
+      <div className="mx-auto w-11/12 max-w-xl mb-6">
+        <div className="rounded-xl p-3 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
+          <h3 className="text-base font-semibold mb-2 text-center">Presets</h3>
+
+          <div className="flex gap-2">
+            <input
+              value={presetName}
+              onChange={(e) => setPresetName(e.target.value)}
+              placeholder="Nom de la page de rune (ex: Ezreal - poke)"
+              className="flex-1 rounded-md px-3 py-2 text-sm ring-1 ring-inset ring-neutral-300 dark:ring-neutral-700 bg-transparent"
+              aria-label="Nom du preset"
+            />
+            <button
+              type="button"
+              onClick={handleSavePreset}
+              disabled={!presetName.trim()}
+              className="rounded-md px-3 py-2 text-sm font-semibold ring-1 ring-inset ring-neutral-300 dark:ring-neutral-700 hover:shadow-sm disabled:opacity-50"
+            >
+              Enregistrer
+            </button>
+          </div>
+
+          {presets.length > 0 ? (
+            <ul className="mt-3 space-y-2">
+              {presets
+                .slice()
+                .sort((a, b) => b.createdAt - a.createdAt)
+                .map((p) => (
+                  <li
+                    key={p.id}
+                    className="flex items-center justify-between gap-2"
+                  >
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium truncate">
+                        {p.name}
+                      </div>
+                      <div className="text-xs text-neutral-600 dark:text-neutral-400 truncate">
+                        {p.primaryPath ?? "—"} · {p.secondaryPath ?? "—"}
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleLoadPreset(p)}
+                        className="rounded-md px-2 py-1 text-xs ring-1 ring-inset ring-neutral-300 dark:ring-neutral-700"
+                      >
+                        Charger
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeletePreset(p.id)}
+                        className="rounded-md px-2 py-1 text-xs ring-1 ring-inset ring-red-300 dark:ring-red-700 text-red-600 dark:text-red-400"
+                      >
+                        Suppr
+                      </button>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          ) : (
+            <p className="mt-3 text-xs text-neutral-600 dark:text-neutral-400 text-center">
+              Aucun preset enregistré.
+            </p>
+          )}
         </div>
       </div>
     </section>
