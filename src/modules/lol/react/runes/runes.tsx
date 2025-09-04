@@ -182,7 +182,7 @@ export default function RunesPage() {
             className="mt-6"
           >
             <div className="mx-auto w-11/12 max-w-xl">
-              <div className="rounded-xl p-3 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
+              <div className="rounded-xl p-3 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
                 <div className="mb-3 text-center">
                   <h2 className="text-lg font-bold">
                     {currentPath.name} — Branche principale
@@ -208,15 +208,25 @@ export default function RunesPage() {
                               ariaLabel={`Choisir ${opt.name} pour ${tier.label}`}
                               onClick={() => handlePickOption(tier.id, opt.id)}
                             >
-                              <div className="min-w-0 transition-colors duration-200">
-                                <div className="font-medium text-sm truncate">
-                                  {opt.name}
-                                </div>
-                                {opt.description && (
-                                  <div className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">
-                                    {opt.description}
-                                  </div>
+                              <div className="flex items-center gap-3 min-w-0 transition-colors duration-200">
+                                {opt.thumbnail && (
+                                  <img
+                                    src={opt.thumbnail}
+                                    alt={opt.name}
+                                    className="h-9 w-9 rounded-md object-cover shrink-0 "
+                                    loading="lazy"
+                                  />
                                 )}
+                                <div className="min-w-0">
+                                  <div className="font-medium text-sm truncate">
+                                    {opt.name}
+                                  </div>
+                                  {opt.description && (
+                                    <div className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                                      {opt.description}
+                                    </div>
+                                  )}
+                                </div>
                               </div>
                             </Card>
                           );
@@ -272,7 +282,7 @@ export default function RunesPage() {
             className="mt-6"
           >
             <div className="mx-auto w-11/12 max-w-xl">
-              <div className="rounded-xl p-3 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
+              <div className="rounded-xl p-3  bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
                 <div className="mb-3 text-center">
                   <h2 className="text-lg font-bold">
                     {currentSecondaryPath.name} — Branche secondaire
@@ -320,15 +330,25 @@ export default function RunesPage() {
                                   )
                                 }
                               >
-                                <div className="min-w-0 transition-colors duration-200">
-                                  <div className="font-medium text-sm truncate">
-                                    {opt.name}
-                                  </div>
-                                  {opt.description && (
-                                    <div className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">
-                                      {opt.description}
-                                    </div>
+                                <div className="flex items-center gap-3 min-w-0 transition-colors duration-200">
+                                  {opt.thumbnail && (
+                                    <img
+                                      src={opt.thumbnail}
+                                      alt={opt.name}
+                                      className="h-9 w-9 rounded-md object-cover shrink-0"
+                                      loading="lazy"
+                                    />
                                   )}
+                                  <div className="min-w-0">
+                                    <div className="font-medium text-sm truncate">
+                                      {opt.name}
+                                    </div>
+                                    {opt.description && (
+                                      <div className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                                        {opt.description}
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
                               </Card>
                             );
@@ -346,7 +366,7 @@ export default function RunesPage() {
       {/* ====== 5) SHARDS ====== */}
       <div className="mt-8">
         <div className="mx-auto w-11/12 max-w-xl">
-          <div className="rounded-xl p-3 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
+          <div className="rounded-xl p-3 bg-white/60 dark:bg-neutral-900/60 backdrop-blur">
             <h3 className="text-base font-semibold mb-2 text-center">
               Shards (statistiques complémentaires)
             </h3>
@@ -366,15 +386,25 @@ export default function RunesPage() {
                           ariaLabel={`Choisir ${opt.name} pour ${tier.label}`}
                           onClick={() => handlePickShard(tier.id, opt.id)}
                         >
-                          <div className="min-w-0 transition-colors duration-200">
-                            <div className="font-medium text-sm truncate">
-                              {opt.name}
-                            </div>
-                            {opt.description && (
-                              <div className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">
-                                {opt.description}
-                              </div>
+                          <div className="flex items-center gap-3 min-w-0 transition-colors duration-200">
+                            {opt.thumbnail && (
+                              <img
+                                src={opt.thumbnail}
+                                alt={opt.name}
+                                className="h-9 w-9 rounded-md object-cover shrink-0"
+                                loading="lazy"
+                              />
                             )}
+                            <div className="min-w-0">
+                              <div className="font-medium text-sm truncate">
+                                {opt.name}
+                              </div>
+                              {opt.description && (
+                                <div className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                                  {opt.description}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </Card>
                       );
@@ -420,18 +450,23 @@ export default function RunesPage() {
                   <li className="font-medium">Shards :</li>
                   {summary.shards.map((s) => (
                     <li key={`sh-${s.tier}`}>
-                      <span className="font-medium">{s.tier} :</span> {s.option}
+                      <span className="font-medium">{s.tier} :</span>{" "}
+                      {s.option}
                     </li>
                   ))}
                 </ul>
                 <div className="mt-4 flex justify-center">
                   <button
-                    type="button"
-                    onClick={handleResetAll}
-                    className="rounded-lg px-4 py-2 text-sm font-semibold ring-1 ring-inset ring-neutral-300 dark:ring-neutral-700 hover:shadow-sm transition-colors duration-200"
-                  >
-                    Réinitialiser toutes les runes
-                  </button>
+  type="button"
+  onClick={handleResetAll}
+  className="px-2.5 py-1.5 rounded-lg cursor-pointer 
+             transition-shadow transition-transform duration-300 ease-out
+             hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:-translate-y-0.5"
+>
+  Réinitialiser toutes les runes
+</button>
+
+
                 </div>
               </>
             ) : (

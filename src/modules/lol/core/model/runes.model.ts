@@ -1,6 +1,6 @@
 // modules/lol/core/model/runes.model.ts
 
-export type RuneOption = { id: string; name: string; description?: string };
+export type RuneOption = { id: string; name: string; description?: string; thumbnail: string };
 
 export type RuneTierId = "keystone" | "slot1" | "slot2" | "slot3";
 export type RuneTier = { id: RuneTierId; label: string; options: RuneOption[] };
