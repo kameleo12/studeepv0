@@ -15,7 +15,7 @@ export function SummaryPanel({
   onReset: () => void;
 }) {
   return (
-    <div className="rounded-xl p-3 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-800 text-sm">
+    <div className="rounded-xl p-3 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-800 text-sm text-white">
       <div className="font-semibold mb-2 text-center">Résumé</div>
       {summary ? (
         <>

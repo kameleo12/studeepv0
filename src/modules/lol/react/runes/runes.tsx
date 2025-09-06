@@ -7,6 +7,9 @@ import { PathScroller } from "./components/PathScroller";
 import { TierGrid } from "./components/TierGrid";
 import { SummaryPanel } from "./components/SummaryPanel";
 import { PresetsPanel } from "./components/PresetsPanel";
+import Image from "next/image";
+
+
 
 export default function RunesPage() {
   const {
@@ -50,12 +53,23 @@ export default function RunesPage() {
   } = useRunesState();
 
   return (
-    <section className="w-full py-8">
+    <section className="relative w-full min-h-screen py-8">
+           <Image
+        src="/images/bg-rune-img.jpg" // place ton fichier dans /public/images/runes-bg.jpg
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover fixed inset-0 -z-10 pointer-events-none"
+      />
+      {/* Overlay lisibilité */}
+      <div className="fixed inset-0 -z-10 pointer-events-none" />
+      
       <motion.h1
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="text-3xl md:text-4xl font-extrabold text-center leading-tight mb-6"
+        className="text-3xl md:text-5xl font-extrabold text-center leading-tight mb-6 text-white tracking-wide drop-shadow-lg"
       >
         Page Runes
       </motion.h1>

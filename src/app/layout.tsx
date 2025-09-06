@@ -5,6 +5,7 @@ import "./globals.css";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 export const metadata = {
   title: "Next Clean archi & TDD starter",
   description: "Next Clean archi & TDD starter",
