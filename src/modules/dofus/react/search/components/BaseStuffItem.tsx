@@ -30,9 +30,6 @@ export function BaseCharacterItem({
           isHovered ? "ring-1 ring-gray-200 shadow-lg" : ""
         }`}
       >
-        {/* Badge nom du personnage */}
-        
-
         <div className="relative block">
           <div className="overflow-hidden rounded-xl">
             <Image
