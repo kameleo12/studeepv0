@@ -31,11 +31,7 @@ export function BaseCharacterItem({
         }`}
       >
         {/* Badge nom du personnage */}
-        <div className="absolute left-2 top-2 z-20">
-          <div className="rounded-lg bg-primary/90 px-3 py-1.5 text-sm font-bold text-black shadow-md">
-            {character.name}
-          </div>
-        </div>
+        
 
         <div className="relative block">
           <div className="overflow-hidden rounded-xl">
