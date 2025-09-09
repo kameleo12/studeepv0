@@ -1,7 +1,6 @@
 
 import { ICharactersGateway } from "@root/modules/dofus/core/gateways/character.gateway";
 import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
-import { CharacterFactory } from "@root/modules/dofus/core/model/character.factory";
 
 
 export class InMemoryCharactersGateway implements ICharactersGateway {
@@ -37,7 +36,7 @@ export class InMemoryCharactersGateway implements ICharactersGateway {
   // --- Données en mémoire ---
  // --- Données en mémoire ---
 private readonly characters: CharacterDomainModel.Character[] = [
-  CharacterFactory.create({
+{
     id: "1",
     name: "Iop",
     thumbnail: "/dofus-img/character-img/iop.png",
@@ -53,8 +52,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "iop_9", name: "Power", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "iop_10", name: "Brokle", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "2",
     name: "Cra",
     thumbnail: "/dofus-img/character-img/cra.png",
@@ -70,8 +69,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "cra_9", name: "Tormenting Arrow", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "cra_10", name: "Paralyzing Arrow", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "3",
     name: "Eniripsa",
     thumbnail: "/dofus-img/character-img/eniripsa.png",
@@ -87,8 +86,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "eni_9", name: "Lethargy Word", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "eni_10", name: "Friendship Word", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "4",
     name: "Enutrof",
     thumbnail: "/dofus-img/character-img/enutrof.png",
@@ -104,8 +103,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "enu_9", name: "Fortune", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "enu_10", name: "Prime of Life", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "5",
     name: "Sram",
     thumbnail: "/dofus-img/character-img/sram.png",
@@ -121,8 +120,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "sram_9", name: "Chakra Concentration", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "sram_10", name: "Invisibility of Others", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "6",
     name: "Sacrieur",
     thumbnail: "/dofus-img/character-img/sacrieur.png",
@@ -138,8 +137,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "sac_9", name: "Assault", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "sac_10", name: "Bold Punishment", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "7",
     name: "Feca",
     thumbnail: "/dofus-img/character-img/feca.png",
@@ -155,8 +154,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "feca_9", name: "Wind Armor", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "feca_10", name: "Immunity", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "8",
     name: "Osamodas",
     thumbnail: "/dofus-img/character-img/osamodas.png",
@@ -172,8 +171,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "osa_9", name: "Spiritual Leash", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "osa_10", name: "Feline Movement", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "9",
     name: "Xelor",
     thumbnail: "/dofus-img/character-img/xelor.png",
@@ -189,8 +188,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "xel_9", name: "Xelor's Punishment", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "xel_10", name: "Teleportation", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "10",
     name: "Ecaflip",
     thumbnail: "/dofus-img/character-img/ecaflip.png",
@@ -206,8 +205,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "eca_9", name: "Wheel of Fortune", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "eca_10", name: "Reflex", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "11",
     name: "Pandawa",
     thumbnail: "/dofus-img/character-img/pandawa.png",
@@ -223,8 +222,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "panda_9", name: "Vertigo", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "panda_10", name: "Explosive Flask", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "12",
     name: "Sadida",
     thumbnail: "/dofus-img/character-img/sadida.png",
@@ -240,8 +239,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "sadi_9", name: "Wild Grass", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "sadi_10", name: "Earthquake", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "13",
     name: "Roublard",
     thumbnail: "/dofus-img/character-img/roublard.png",
@@ -257,8 +256,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "rogue_9", name: "Detonation", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "rogue_10", name: "Rougery", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "14",
     name: "Zobal",
     thumbnail: "/dofus-img/character-img/zobal.png",
@@ -274,8 +273,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "zobal_9", name: "Pursuit", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "zobal_10", name: "Capering", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "15",
     name: "Steamer",
     thumbnail: "/dofus-img/character-img/steamer.png",
@@ -291,8 +290,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "steamer_9", name: "Evolution", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "steamer_10", name: "Froth", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "16",
     name: "Eliotrope",
     thumbnail: "/dofus-img/character-img/eliotrope.png",
@@ -308,8 +307,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "elio_9", name: "Stupefaction", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "elio_10", name: "Respite", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "17",
     name: "Huppermage",
     thumbnail: "/dofus-img/character-img/huppermage.png",
@@ -325,8 +324,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "hup_9", name: "Counter", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "hup_10", name: "Manifestation", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "18",
     name: "Ouginak",
     thumbnail: "/dofus-img/character-img/ouginak.png",
@@ -342,8 +341,8 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "oug_9", name: "Whipkick", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "oug_10", name: "Sniff", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
-  CharacterFactory.create({
+  },
+  {
     id: "19",
     name: "Forgelance",
     thumbnail: "/dofus-img/character-img/forgelance.png",
@@ -359,6 +358,6 @@ private readonly characters: CharacterDomainModel.Character[] = [
       { id: "fl_9", name: "Convergence", icon: "/dofus-img/spell-img/icon_9.png" },
       { id: "fl_10", name: "Counterweight", icon: "/dofus-img/spell-img/icon_10.png" },
     ],
-  }),
+  },
 ]};
 
