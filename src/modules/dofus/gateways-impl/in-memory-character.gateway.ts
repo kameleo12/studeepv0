@@ -2,7 +2,7 @@
 import { ICharactersGateway } from "@root/modules/dofus/core/gateways/character.gateway";
 import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
 import { CharacterFactory } from "@root/modules/dofus/core/model/character.factory";
-import { wait } from "../../shared/utils/wait.utils";
+
 
 export class InMemoryCharactersGateway implements ICharactersGateway {
   private lastQuery = "";
@@ -15,7 +15,7 @@ export class InMemoryCharactersGateway implements ICharactersGateway {
   async getResults(
     searchId: string
   ): Promise<CharacterDomainModel.Character[]> {
-    await wait(3000);
+    ;
 
     const q = this.lastQuery;
     if (!q) return this.characters;

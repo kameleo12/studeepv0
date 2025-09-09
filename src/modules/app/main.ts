@@ -4,7 +4,7 @@ import axios, { AxiosInstance } from "axios";
 import { Dependencies } from "../store/dependencies";
 import { AppStore, createStore } from "../store/store";
 import { InMemoryCharactersGateway } from "@root/modules/dofus/gateways-impl/in-memory-character.gateway";
-import { InMemoryItemsGateway } from "@root/modules/lol/gateways-impl/in-memory-items.gateway";
+
 
 export class App {
   public dependencies: Dependencies;
@@ -23,7 +23,7 @@ export class App {
 
       /** GATEWAYS */
       charactersGateway: new InMemoryCharactersGateway(),
-      itemsGateway: new InMemoryItemsGateway(),
+
     };
   }
 }

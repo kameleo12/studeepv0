@@ -1,8 +1,10 @@
 "use client";
 
+
+import { Skeleton } from "@root/modules/dofus/react/search/components/Skeleton";
 import { SearchCharacterItem } from "../components/SearchItem";
 import { useSearchResultsCharacter } from "../hooks/use-search-results.hook";
-import { Skeleton } from "../../../../shared/react/components/ui/Skeleton";
+
 import { motion } from "framer-motion";
 
 export default function SearchResults() {

@@ -2,7 +2,8 @@
 
 
 import { CharacterDomainModel } from "@root/modules/dofus/core/model/character.domain-model";
-import { BaseCharacterItem } from "@root/modules/shared/react/components/ui/BaseStuffItem";
+import { BaseCharacterItem } from "@root/modules/dofus/react/search/components/BaseStuffItem";
+
 import { useState } from "react";
 
 interface SearchCharacterItemProps {
