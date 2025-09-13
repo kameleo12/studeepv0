@@ -1,4 +1,5 @@
-import { ICharactersGateway } from "@root/modules/dofus/core/gateways/character.gateway";
+import { IStorageGateway } from "@root/modules/drive/core/gateways/storage.gateway";
+
 
 
 
@@ -10,6 +11,5 @@ export type Dependencies = {
 
   /* GATEWAYS */
 
-  charactersGateway: ICharactersGateway;
-
+ storageGateway: IStorageGateway; 
 };

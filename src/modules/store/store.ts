@@ -1,3 +1,4 @@
+// modules/store/store.ts
 import { useDispatch } from "react-redux";
 import {
   AnyAction,
@@ -7,16 +8,15 @@ import {
 } from "@reduxjs/toolkit";
 import { Dependencies } from "./dependencies";
 import { AppState } from "./app-state";
-import { currentCharacterReducer as currentCharacter } from "../dofus/core/reducers/current-character.reducer";
-import { charactersSearchingReducer as charactersSearching } from "../dofus/core/reducers/search-results.reducer";
-import { characterSlotsReducer as characterSlots } from "@root/modules/dofus/core/reducers/character-slots.reducer";
 
+import { driveTreeReducer as driveTree } from "@root/modules/drive/core/reducers/drive-tree.slice";
+import { driveTransferReducer as driveTransfer } from "@root/modules/drive/core/reducers/drive-transfer.slice";
+import { driveViewerReducer as driveViewer } from "@root/modules/drive/core/reducers/drive-viewer.slice";
 
 const reducers = combineReducers({
-  currentCharacter,
-  charactersSearching,
-  characterSlots,
-
+  driveTree,
+  driveTransfer,
+  driveViewer,
 });
 
 export type AppStore = ReturnType<typeof createStore>;
@@ -33,7 +33,7 @@ export const createStore = (config: {
   dependencies: Dependencies;
 }) => {
   const store = configureStore({
-    preloadedState: config?.initialState,
+    preloadedState: config?.initialState as any,
     reducer: reducers,
     devTools: true,
     middleware: (getDefaultMiddleware: any) => {
@@ -41,6 +41,7 @@ export const createStore = (config: {
         thunk: {
           extraArgument: config.dependencies,
         },
+        serializableCheck: false,
       });
 
       return middleware;

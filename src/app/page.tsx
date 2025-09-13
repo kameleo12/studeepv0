@@ -1,7 +1,10 @@
-import Search from "@root/modules/dofus/react/search/Search";
+// app/page.tsx
+
+import DrivePage from "../modules/drive/react/DrivePage";
+
 
 const RootPage = () => {
-  return <Search />;
+  return <DrivePage />;
 };
 
 export default RootPage;

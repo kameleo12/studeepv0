@@ -1,9 +1,9 @@
-// src/modules/app/main.ts
+// modules/app/main.ts
 import axios, { AxiosInstance } from "axios";
-
 import { Dependencies } from "../store/dependencies";
 import { AppStore, createStore } from "../store/store";
-import { InMemoryCharactersGateway } from "@root/modules/dofus/gateways-impl/in-memory-character.gateway";
+import { IndexedDBStorageGateway } from "@root/modules/drive/gateway-impl/indexeddb-storage.gateway";
+
 
 
 export class App {
@@ -19,11 +19,10 @@ export class App {
 
   setupDependencies(): Dependencies {
     return {
-      /** PROVIDERS */
+      /* PROVIDERS */
 
-      /** GATEWAYS */
-      charactersGateway: new InMemoryCharactersGateway(),
-
+      /* GATEWAYS */
+      storageGateway: new IndexedDBStorageGateway(),
     };
   }
 }
