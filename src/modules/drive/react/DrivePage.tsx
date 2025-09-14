@@ -15,7 +15,9 @@ export default function DrivePage() {
   const dispatch = useAppDispatch();
   const loading = useSelector((s: AppState) => s.driveTree.loading);
   const error = useSelector((s: AppState) => s.driveTree.error);
-  const currentFolderId = useSelector((s: AppState) => s.driveTree.currentFolderId);
+  const currentFolderId = useSelector(
+    (s: AppState) => s.driveTree.currentFolderId
+  );
 
   useEffect(() => {
     // Charger la racine au premier rendu
@@ -27,7 +29,9 @@ export default function DrivePage() {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-semibold">Mon Drive</h1>
         <button
-          onClick={() => dispatch(listFolder({ folderId: currentFolderId ?? null }) as any)}
+          onClick={() =>
+            dispatch(listFolder({ folderId: currentFolderId ?? null }) as any)
+          }
           className="px-3 py-2 rounded-md border hover:bg-gray-50"
         >
           Rafraîchir
